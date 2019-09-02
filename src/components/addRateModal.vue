@@ -114,6 +114,7 @@
 </template>
 
 <script>
+require("dotenv").config();
 import { setTimeout } from "timers";
 import axios from "axios";
 export default {
@@ -151,11 +152,11 @@ export default {
     },
     addRate() {
       axios
-        .get(`${process.env.VUE_APP_API_URL}/rates/userprint/${this.userPrint}`)
+        .get(`${process.env.API_URL}/rates/userprint/${this.userPrint}`)
         .then(data => {
           if (data.data.length === 0) {
             axios
-              .post(`${process.env.VUE_APP_API_URL}/rates/${this.school._id}`, {
+              .post(`${process.env.API_URL}/rates/${this.school._id}`, {
                 user_fingerprint: this.userPrint,
                 content: this.rateValues.content,
                 flow: this.rateValues.flow,

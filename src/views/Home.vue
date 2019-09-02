@@ -35,6 +35,7 @@
   </keep-alive>
 </template>
 <script>
+require("dotenv").config();
 import axios from "axios";
 import schoolList from "@/components/schoolList";
 import discoverSection from "@/components/discoverSection";
@@ -58,7 +59,7 @@ export default {
     getSchoolList() {
       this.keyToRender += 1;
       axios
-        .get(`${process.env.VUE_APP_API_URL}/schools?city=${this.city}`)
+        .get(`${process.env.API_URL}/schools?city=${this.city}`)
         .then(data => {
           this.allSchools = data.data;
           console.log(this.allSchools);
