@@ -157,14 +157,17 @@ export default {
         .then(data => {
           if (data.data.length === 0) {
             axios
-              .post(`${process.env.API_URL}/rates/${this.school._id}`, {
-                user_fingerprint: this.userPrint,
-                content: this.rateValues.content,
-                flow: this.rateValues.flow,
-                teachers: this.rateValues.teachers,
-                commute: this.rateValues.commute,
-                standard: this.rateValues.standard
-              })
+              .post(
+                `https://school-248910.appspot.com/rates/userprint/rates/${this.school._id}`,
+                {
+                  user_fingerprint: this.userPrint,
+                  content: this.rateValues.content,
+                  flow: this.rateValues.flow,
+                  teachers: this.rateValues.teachers,
+                  commute: this.rateValues.commute,
+                  standard: this.rateValues.standard
+                }
+              )
               .then(() => {
                 this.$emit("updateRatesList");
                 this.message = {
