@@ -1,5 +1,17 @@
 <template>
-  <div class="about">
-    <h1>Join Aske, ask your friends about everything.</h1>
-  </div>
+  <div class="joinWrapper">test</div>
 </template>
+<script>
+require("clientjs");
+export default {
+  data() {
+    return {};
+  },
+  mounted() {
+    let client = new ClientJS();
+    let print = client.getFingerprint();
+  }
+};
+</script>
+<style lang="scss" scoped>
+</style>
