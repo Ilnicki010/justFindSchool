@@ -29,7 +29,6 @@
 </template>
 
 <script>
-require("dotenv").config();
 import axios from "axios";
 import rateKnobs from "@/components/rateKnobs";
 import addRateModal from "@/components/addRateModal";
@@ -58,13 +57,17 @@ export default {
   },
   methods: {
     getSchool() {
-      axios.get(`${process.env.API_URL}/schools?uid=${this.uid}`).then(data => {
-        this.school = data.data[0];
-      });
+      axios
+        .get(`https://school-248910.appspot.com/schools?uid=${this.uid}`)
+        .then(data => {
+          this.school = data.data[0];
+        });
     },
     getRates() {
       axios
-        .get(`${process.env.API_URL}/rates/school/${this.school._id}`)
+        .get(
+          `https://school-248910.appspot.com/rates/school/${this.school._id}`
+        )
         .then(data => {
           this.ratesArr = data.data;
         });

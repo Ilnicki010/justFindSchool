@@ -114,7 +114,6 @@
 </template>
 
 <script>
-require("dotenv").config();
 import { setTimeout } from "timers";
 import axios from "axios";
 export default {
@@ -152,7 +151,9 @@ export default {
     },
     addRate() {
       axios
-        .get(`${process.env.API_URL}/rates/userprint/${this.userPrint}`)
+        .get(
+          `https://school-248910.appspot.com/rates/userprint/${this.userPrint}`
+        )
         .then(data => {
           if (data.data.length === 0) {
             axios
