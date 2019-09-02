@@ -158,7 +158,7 @@ export default {
           if (data.data.length === 0) {
             axios
               .post(
-                `https://school-248910.appspot.com/rates/userprint/rates/${this.school._id}`,
+                `https://school-248910.appspot.com/rates/${this.school._id}`,
                 {
                   user_fingerprint: this.userPrint,
                   content: this.rateValues.content,
