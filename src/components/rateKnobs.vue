@@ -78,6 +78,7 @@ export default {
   z-index: 1;
   max-height: 100px;
   .knobs__knob {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -94,7 +95,5 @@ export default {
   }
 }
 @media (min-width: 720px) {
-  .knobs {
-  }
 }
 </style>

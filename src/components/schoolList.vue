@@ -11,17 +11,18 @@
       <div>
         <label for="city-select" class="search-section__label">Wyszukaj</label>
         <input
+          v-model="searchInput"
           class="sort-select"
           type="text"
           name="school-search"
           id="school-search"
-          :placeholder="`np. ${allSchools[0].name}`"
+          placeholder="np. IX LO"
         />
       </div>
     </div>
     <section class="school-list">
       <article v-for="school in orderedSchools" :key="school._id">
-        <school-item :school="school" @click.native="itemClickHandler(school.name)" />
+        <school-item v-if="school" :school="school" />
       </article>
     </section>
   </div>
@@ -30,6 +31,7 @@
 <script>
 import schoolItem from "@/components/schoolItem";
 import sortBy from "lodash.sortby";
+import axios from "axios";
 import _ from "lodash";
 export default {
   components: {
@@ -45,7 +47,8 @@ export default {
   data() {
     return {
       allSchools: [],
-      sort: "teachers"
+      sort: "teachers",
+      searchInput: ""
     };
   },
   computed: {
@@ -58,12 +61,7 @@ export default {
       this.allSchools = this.schoolList;
     }
   },
-  methods: {
-    itemClickHandler(id) {
-      console.log(id);
-      console.log("test");
-    }
-  }
+  methods: {}
 };
 </script>
 

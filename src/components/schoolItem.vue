@@ -1,6 +1,6 @@
 <template>
   <router-link :to="'/szkola/' + school.uid">
-    <content-loader
+    <!-- <content-loader
       v-if="!loaded"
       :height="260"
       :width="330"
@@ -19,7 +19,7 @@
       <rect x="50" y="235.2" rx="3" ry="3" width="50" height="8" />
       <rect x="140" y="235.2" rx="3" ry="3" width="50" height="8" />
       <rect x="230" y="235.2" rx="3" ry="3" width="50" height="8" />
-    </content-loader>
+    </content-loader>-->
     <div v-if="loaded" class="schoolItemWrapper">
       <div class="main-part">
         <div class="image" :style="{ backgroundImage: 'url(' + school.images[0] + ')' }"></div>
@@ -85,14 +85,14 @@ export default {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: 100px;
+    height: 120px;
     .image {
       width: 100px;
       height: 100%;
       background-position: center;
       background-size: cover;
       background-repeat: no-repeat;
-      border-radius: 5px 0 0 0;
+      border-radius: 5px 0 0 5px;
     }
     .content {
       padding: 0 20px;
@@ -128,10 +128,11 @@ export default {
       justify-content: space-between;
       align-items: flex-start;
       .content {
-        padding: 10px 0 0 30px;
+        padding: 15px 0 10px 30px;
       }
       .image {
         width: 100%;
+        height: 60%;
         border-radius: 5px 5px 0 0;
       }
     }

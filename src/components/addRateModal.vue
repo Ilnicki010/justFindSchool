@@ -93,9 +93,17 @@
           id="opinionContent"
           placeholder="Opisz co uwazasz o tej swojej szkole."
         ></textarea>
-        <div class="buttons">
-          <button @click="nextStep(1)" class="btn btn--ghost-red">Krok 1</button>
-          <button @click="addRate" class="btn btn--primary">Dodaj!</button>
+        <div class="buttons-captacha-wrapper">
+          <vue-recaptcha
+            :load-recaptcha-script="true"
+            @verify="markRecaptchaAsVerified"
+            sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+            class="recaptcha"
+          ></vue-recaptcha>
+          <div class="buttons">
+            <button @click="nextStep(1)" class="btn btn--ghost-red">Krok 1</button>
+            <button @click="addRate" class="btn btn--primary">Dodaj!</button>
+          </div>
         </div>
       </div>
     </transition>
@@ -114,9 +122,13 @@
 </template>
 
 <script>
+import VueRecaptcha from "vue-recaptcha";
 import { setTimeout } from "timers";
 import axios from "axios";
 export default {
+  components: {
+    VueRecaptcha
+  },
   data() {
     return {
       step: 1,
@@ -132,6 +144,10 @@ export default {
         flow: 3,
         commute: 3,
         standard: 3
+      },
+      recaptcha: {
+        recaptchaVerified: false,
+        pleaseTickRecaptchaMessage: ""
       }
     };
   },
@@ -149,13 +165,24 @@ export default {
     nextStep(step) {
       this.step = step;
     },
+    markRecaptchaAsVerified(response) {
+      this.recaptcha.pleaseTickRecaptchaMessage = "";
+      this.recaptcha.recaptchaVerified = true;
+      console.log(response);
+    },
     addRate() {
+      if (!this.recaptcha.recaptchaVerified) {
+        this.recaptcha.pleaseTickRecaptchaMessage = "Please tick recaptcha.";
+        console.log("nono");
+
+        return true; // prevent form from submitting
+      }
       axios
         .get(
           `https://school-248910.appspot.com/rates/userprint/${this.userPrint}`
         )
         .then(data => {
-          if (data.data.length === 0) {
+          if (data.data.length === 0 && this.rateValues.content.length > 5) {
             axios
               .post(
                 `https://school-248910.appspot.com/rates/${this.school._id}`,
@@ -217,20 +244,28 @@ export default {
   margin-left: auto;
   margin-right: auto;
   width: 100%;
-  height: 75vh;
+  height: 80vh;
   z-index: 9999;
   padding: 20px;
   background: #fff;
   box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.3);
   .buttons {
     display: flex;
+    flex-direction: row;
+    display: flex;
     justify-content: space-between;
     padding: 20px 0;
-    position: relative;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
+    margin: 0 10px;
+  }
+  .buttons-captacha-wrapper {
+    display: flex;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    .recaptcha {
+      margin: auto;
+    }
   }
   .modal-header {
     margin: 15px 0;
@@ -268,7 +303,7 @@ export default {
   .step-two {
     .textarea-content {
       width: 100%;
-      height: 40%;
+      height: 150px;
       padding: 10px;
       border: #16dea3 1px solid;
       border-radius: 5px;
@@ -304,6 +339,12 @@ export default {
 @media (min-width: 720px) {
   .modalWrapper {
     padding: 50px 90px;
+    .buttons-captacha-wrapper {
+      .recaptcha {
+        margin: initial;
+        margin-left: auto;
+      }
+    }
   }
 }
 </style>

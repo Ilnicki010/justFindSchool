@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <keep-alive>
-      <router-view v-if="$route.name == 'home'"></router-view>
+      <router-view v-if="$route.name === 'home'"></router-view>
     </keep-alive>
     <router-view v-if="$route.name != 'home'"></router-view>
   </div>
@@ -55,18 +55,18 @@ select {
 input[type="range"] {
   -webkit-appearance: none;
   background: transparent;
-  height: 25px;
+  height: 35px;
 }
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   background: #16dea3;
-  height: 25px;
-  width: 25px;
+  height: 35px;
+  width: 35px;
   border-radius: 99px;
   border: none;
 }
 input[type="range"]::-webkit-slider-runnable-track {
-  height: 25px;
+  height: 35px;
   background: linear-gradient(to right, #f1f1f1, #dbdbdb);
   border-radius: 100px;
 }
@@ -82,6 +82,10 @@ input:-moz-placeholder {
   /* Firefox 18- */
   color: #fff;
 }
+html {
+  -webkit-tap-highlight-color: rgba(#16dea3, 0.3);
+}
+
 .btn {
   text-align: center;
   font-weight: 600;
@@ -105,6 +109,11 @@ input:-moz-placeholder {
   background: none;
   color: #f14848;
   border: 1px solid #f14848;
+}
+.btn--ghost-green {
+  background: none;
+  color: #16dea3;
+  border: 1px solid #16dea3;
 }
 .btn--rounded {
   border-radius: 100px;
@@ -130,6 +139,18 @@ input:-moz-placeholder {
     opacity: 1;
   }
 }
+@keyframes shake {
+  0%,
+  7%,
+  20%,
+  50%,
+  100% {
+    transform: scale(1);
+  }
+  3% {
+    transform: scale(1.06);
+  }
+}
 //transitons
 .slide-enter-active,
 .slide-right-enter-active .slide-left-enter-active {
@@ -148,7 +169,6 @@ input:-moz-placeholder {
 .slide-leave {
   transform: translateY(0);
 }
-//gfgsfgdsgd
 .slide-left-leave-active,
 .slide-left-enter-active {
   transition: all 0.3s;
@@ -176,5 +196,15 @@ input:-moz-placeholder {
 }
 .slide-right-leave-to {
   transform: translateY(100vw);
+}
+.popup-enter-active,
+.popup-leave-active {
+  transition: transform 0.2s ease-out;
+}
+.popup-enter {
+  transform: scale(0.9);
+}
+.popup-enter-to {
+  transform: scale(1);
 }
 </style>

@@ -27,7 +27,7 @@
           <discover-section />
           <div class="all-schools" v-if="allSchools" :key="keyToRender">
             <h3>Wszystkie szkoły ({{allSchools.length}})</h3>
-            <school-list :schoolList="allSchools" />
+            <school-list v-if="allSchools" :schoolList="allSchools" />
           </div>
         </section>
       </main>
@@ -48,10 +48,25 @@ export default {
       city: "Gdynia",
       allSchools: [],
       discoverReady: false,
-      keyToRender: 0
+      keyToRender: 0,
+      logoType: "logo_small.svg"
     };
   },
+  props: {
+    cityName: {
+      type: String,
+      default: "Gdynia",
+      required: false
+    }
+  },
   mounted() {
+    if (window.screen.width < 720) {
+      this.logoType = "@/assets/logo_small.svg";
+    } else {
+      this.logoType = "logo_big.svg";
+    }
+    console.log(this.logoType);
+    this.city = this.cityName;
     this.getSchoolList();
   },
   methods: {
@@ -75,8 +90,8 @@ export default {
   flex-direction: column;
   .main-header {
     display: flex;
-    justify-content: center;
     align-items: center;
+    flex-direction: column;
     width: 100%;
     height: 50vh;
     color: #fff;
@@ -88,9 +103,14 @@ export default {
       url("../assets/header.jpg");
     .main-header__content {
       margin: auto;
-      padding: 20px;
+      padding: 0 10px;
       border-radius: 5px;
       width: 85%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
       h1 {
         margin: 0;
         margin-bottom: 30px;

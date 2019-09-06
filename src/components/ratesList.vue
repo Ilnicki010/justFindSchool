@@ -6,6 +6,7 @@
         <span>{{rate.content}}</span>
       </p>
       <span class="rate__date">Dodano: {{getFullDate(rate.created_at)}}</span>
+      <img class="pattern" src="../assets/pattern.svg" alt="pattern" />
     </div>
   </div>
 </template>
@@ -36,6 +37,7 @@ export default {
   display: flex;
   flex-direction: column;
   position: relative;
+  border-radius: 10px;
   .rate {
     padding: 20px;
     box-shadow: 0 5px 10px rgba(#000, 0.2);
@@ -45,6 +47,10 @@ export default {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+    background: #fff;
+    .pattern {
+      display: none;
+    }
     .rate__date {
       opacity: 0.7;
       font-size: 0.8rem;
@@ -54,32 +60,31 @@ export default {
       padding: 5px 10px 0;
     }
   }
-  // &::after {
-  //   content: "\201D";
-  //   position: absolute;
-  //   top: -150px;
-  //   right: -60px;
-  //   color: #16dea3;
-  //   font-size: 30rem;
-  //   z-index: -9999999;
-  //   line-height: 1;
-  //   letter-spacing: 0;
-  // }
 }
 @media (min-width: 720px) {
   .ratesWrapper {
+    padding: 20px;
     flex-direction: row;
     flex-wrap: wrap;
     position: relative;
     z-index: 999;
+    background: linear-gradient(to right, #16dea3, #0d8561);
     .rate {
       margin: 20px;
       width: 100%;
       display: flex;
       flex-direction: row-reverse;
       position: relative;
+
       .knobsWrapper {
         flex: 3;
+      }
+      .pattern {
+        display: block;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        border-radius: 0 0 0 10px;
       }
       .rate__date {
         flex: 1;
@@ -88,9 +93,10 @@ export default {
         flex: 4;
         margin: 0 20px;
         padding: 0 10px;
-        span {
-          border-bottom: 1px dotted #16dea3;
-        }
+        border-left: 1px solid #16dea3;
+        // span {
+        //   border-bottom: 1px dotted #16dea3;
+        // }
       }
     }
   }

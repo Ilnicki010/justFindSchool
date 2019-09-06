@@ -6,14 +6,24 @@
       :style="{ backgroundImage: 'url(' + school.images[0] + ')' }"
     >
       <h1>{{school.name}}</h1>
+      <div class="icons">
+        <span>{{school.adress}} | {{school.city}}</span>
+      </div>
     </header>
     <div class="content-wrapper">
       <button @click="openModal" class="btn btn--primary btn--rounded">Dodaj anonimową opinię</button>
       <div class="content-wrapper__content">
-        <rate-knobs class="rateAvg-knobs" v-if="school.ratesAvg" :rateValues="school.ratesAvg" />
+        <transition name="popup">
+          <rate-knobs class="rateAvg-knobs" v-if="school.ratesAvg" :rateValues="school.ratesAvg" />
+        </transition>
         <div class="all-rates">
           <h2>Opinie ({{ratesArr.length}})</h2>
-          <rates-list :ratesArr="ratesArr" />
+          <transition name="slide">
+            <rates-list v-if="ratesArr.length > 0" :ratesArr="ratesArr" />
+            <div v-else class="empty">
+              <img class="icon" src="../assets/no_data.svg" alt="empty icon" />
+            </div>
+          </transition>
         </div>
       </div>
     </div>
@@ -52,7 +62,8 @@ export default {
     return {
       school: null,
       ratesArr: [],
-      rateModal: false
+      rateModal: false,
+      loaded: false
     };
   },
   methods: {
@@ -90,8 +101,10 @@ export default {
     }
   },
   mounted() {
+    this.loaded = true;
+
     this.getSchool();
-    window.addEventListener("scroll", this.onScroll);
+    // window.addEventListener("scroll", this.onScroll);
   },
   beforeDestroy() {
     window.removeEventListener("scroll", this.onScroll);
@@ -110,7 +123,7 @@ export default {
     align-items: center;
     text-align: center;
     width: 100%;
-    height: 30vh;
+    height: 40vh;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -119,6 +132,15 @@ export default {
     top: 0;
     left: 0;
     color: #fff;
+    .icons {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      z-index: 999999;
+      .icon {
+        color: #fff;
+      }
+    }
     h1,
     p {
       z-index: 9999;
@@ -133,29 +155,45 @@ export default {
       height: 100%;
       background-image: linear-gradient(
         to top,
-        rgba(#000, 0.4),
+        rgba(#000, 0.6),
         rgba(#000, 0.2)
       );
       z-index: 999;
     }
   }
   .content-wrapper {
-    margin-top: 30vh;
+    margin-top: 40vh;
+    min-height: 100vh;
     z-index: 999;
     background: #fff;
     padding: 20px;
+    box-shadow: 0 -5px 20px rgba(#000, 0.9);
     .btn {
       position: absolute;
-      top: calc(30vh - 20px);
+      top: calc(40vh - 20px);
       margin-left: auto;
       margin-right: auto;
       left: 0;
       right: 0;
       height: 40px;
       width: 230px;
+      border: none;
+      background: linear-gradient(to left, #0d8561, #0d8561);
+      animation: shake 5s infinite linear;
     }
     .content-wrapper__content {
       margin-top: 5vh;
+      position: relative;
+      height: 100%;
+      .empty {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .icon {
+          width: 40vw;
+        }
+      }
       .rateAvg-knobs {
         position: relative;
         width: 100%;
@@ -163,6 +201,7 @@ export default {
       .all-rates {
         position: relative;
         margin-top: 7vh;
+        height: 100%;
       }
     }
   }
@@ -180,38 +219,12 @@ export default {
       }
       .content-wrapper__content {
         .rateAvg-knobs {
+          position: relative;
           min-height: 20vh;
-          &::before {
-            content: "Średnia ocen";
-            position: absolute;
-            top: 0;
-            right: 0;
-            color: #16dea3;
-            z-index: -99999;
-            font-size: 1.5rem;
-            opacity: 1;
-            transform-origin: bottom right;
-            transform: rotate(-90deg);
-            line-height: 0;
-          }
         }
         .all-rates {
           margin-top: 10vh;
           position: relative;
-          &::before {
-            content: "Wszystkie opinie";
-            font-family: "Sacramento", cursive;
-            position: absolute;
-            top: 0;
-            left: 0;
-            color: #16dea3;
-            font-size: 5rem;
-            opacity: 0.6;
-            transform-origin: top left;
-            line-height: 0;
-            transform: rotate(90deg);
-            z-index: -999;
-          }
         }
       }
     }
