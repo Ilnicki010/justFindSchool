@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
-import Join from './views/Join.vue';
 import schoolFullInfo from './views/schoolFullInfo.vue';
 
 Vue.use(Router);
@@ -11,7 +10,6 @@ export default new Router({
   routes: [{
       path: '/',
       name: 'home',
-      props: true,
       component: Home,
     },
     {
@@ -19,11 +17,7 @@ export default new Router({
       name: 'schoolFullInfo',
       component: schoolFullInfo,
       props: true,
-    }, {
-      path: '/join',
-      name: 'join',
-      component: Join,
-    },
+    }
 
   ],
 });
