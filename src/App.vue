@@ -190,7 +190,7 @@ html {
 .slide-fast-enter,
 .slide-fast-leave-to,
 .slide-leave-to {
-  transform: translateY(70vh);
+  transform: translateY(100vh);
 }
 .slide-enter-to,
 .slide-fast-enter-to,
@@ -263,11 +263,13 @@ html {
 .slide-up-enter-active {
   transition: 0.4s 0.2s ease-out;
 }
-.slide-up-enter {
+.slide-up-enter,
+.slide-up-leave-to {
   opacity: 0;
   transform: translateY(-20vh);
 }
-.slide-up-enter-to {
+.slide-up-enter-to,
+.slide-up-leave {
   opacity: 1;
   transform: translateY(0);
 }

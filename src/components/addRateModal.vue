@@ -95,9 +95,10 @@
         ></textarea>
         <div class="buttons-captacha-wrapper">
           <vue-recaptcha
+            v-if="RECAPTCHAKEY"
             :load-recaptcha-script="true"
             @verify="markRecaptchaAsVerified"
-            sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+            :sitekey="recaptcha_key"
             class="recaptcha"
           ></vue-recaptcha>
           <div class="buttons">
@@ -128,6 +129,7 @@
 import VueRecaptcha from "vue-recaptcha";
 import { setTimeout } from "timers";
 import axios from "axios";
+
 require("clientjs");
 export default {
   components: {
@@ -152,7 +154,8 @@ export default {
       errorMessage: "",
       recaptcha: {
         recaptchaVerified: false
-      }
+      },
+      recaptcha_key: process.env.VUE_APP_RECAPTCHA
     };
   },
   props: {
