@@ -95,7 +95,6 @@
         ></textarea>
         <div class="buttons-captacha-wrapper">
           <vue-recaptcha
-            v-if="RECAPTCHAKEY"
             :load-recaptcha-script="true"
             @verify="markRecaptchaAsVerified"
             :sitekey="recaptcha_key"
