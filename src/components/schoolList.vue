@@ -53,6 +53,14 @@ export default {
   },
   computed: {
     orderedSchools() {
+      if (this.searchInput.length >= 2) {
+        return this.allSchools.filter(item => {
+          return this.searchInput
+            .toLowerCase()
+            .split(" ")
+            .every(v => item.name.toLowerCase().includes(v));
+        });
+      }
       return _.orderBy(this.allSchools, `ratesAvg.${this.sort}`, "desc");
     }
   },
@@ -71,7 +79,7 @@ export default {
     display: flex;
     align-items: center;
     width: 100%;
-    padding: 0 20px 35px;
+    padding: 0 13px 35px;
     flex-direction: column;
     div {
       width: 100%;
@@ -86,7 +94,7 @@ export default {
       flex: 3;
       background: #16dea3;
       color: #fff;
-      padding: 7px 7px 7px 13px;
+      padding: 9px 9px 9px 13px;
       border-radius: 3px;
       outline: none;
       border: 0;

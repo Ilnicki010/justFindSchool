@@ -22,7 +22,7 @@
     </content-loader>-->
     <div v-if="loaded" class="schoolItemWrapper">
       <div class="main-part">
-        <div class="image" :style="{ backgroundImage: 'url(' + school.images[0] + ')' }"></div>
+        <div class="image" v-lazy:background-image="school.images[0]"></div>
         <div class="content">
           <h4>{{school.name}}</h4>
           <p>{{school.adress}} {{school.city}}</p>

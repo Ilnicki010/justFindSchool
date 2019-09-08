@@ -88,9 +88,11 @@ export default {
     },
     openModal() {
       this.rateModal = true;
+      document.body.style.overflowY = "hidden";
     },
     closeModal() {
       this.rateModal = false;
+      document.body.style.overflowY = "scroll";
     }
   },
   watch: {

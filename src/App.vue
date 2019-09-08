@@ -62,11 +62,16 @@ label {
   padding: 3px 0;
   font-size: 0.9rem;
 }
+input,
+textarea {
+  font-size: 16px;
+}
 select {
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
   -webkit-appearance: none;
+  font-size: 16px;
 }
 input[type="range"] {
   -webkit-appearance: none;
