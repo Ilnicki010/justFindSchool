@@ -1,10 +1,6 @@
 <template>
   <div class="featured-articles" v-if="ready">
     <h3>Odkrywaj</h3>
-    <!-- <div class="soon">
-      <work-icon :height="100" :width="200" />
-      <p>Wkrótce</p>
-    </div>-->
     <div class="articles-list">
       <article class="featured">
         <h4>

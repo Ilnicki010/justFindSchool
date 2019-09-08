@@ -1,25 +1,5 @@
 <template>
   <router-link :to="'/szkola/' + school.uid">
-    <!-- <content-loader
-      v-if="!loaded"
-      :height="260"
-      :width="330"
-      :speed="2"
-      primaryColor="#f3f3f3"
-      secondaryColor="#dbdbdb"
-      class="preloader"
-    >
-      <rect x="97" y="31.2" rx="3" ry="3" width="113.05" height="10.64" />
-      <rect x="97" y="13.2" rx="3" ry="3" width="150.45" height="10" />
-      <rect x="0" y="0" rx="5" ry="5" width="80" height="80" />
-      <rect x="97" y="65.2" rx="3" ry="3" width="80" height="7" />
-      <circle cx="165" cy="177" r="40" />
-      <circle cx="75" cy="176.9983035961523" r="40" />
-      <circle cx="255" cy="177" r="40" />
-      <rect x="50" y="235.2" rx="3" ry="3" width="50" height="8" />
-      <rect x="140" y="235.2" rx="3" ry="3" width="50" height="8" />
-      <rect x="230" y="235.2" rx="3" ry="3" width="50" height="8" />
-    </content-loader>-->
     <div v-if="loaded" class="schoolItemWrapper">
       <div class="main-part">
         <div class="image" v-lazy:background-image="school.images[0]"></div>
