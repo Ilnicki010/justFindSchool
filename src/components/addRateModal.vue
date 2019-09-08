@@ -104,6 +104,9 @@
             <button @click="nextStep(1)" class="btn btn--ghost-red">Krok 1</button>
             <button @click="addRate" class="btn btn--primary">Dodaj!</button>
           </div>
+          <transition name="slide">
+            <span v-if="errorMessage" class="error-message">{{errorMessage}}</span>
+          </transition>
         </div>
       </div>
     </transition>
@@ -115,7 +118,7 @@
       >
         <span class="message__header-text" v-if="message.error">Ups...</span>
         <span class="message__header-text" v-if="message.success">Mamy to!</span>
-        <p>{{message.content}}</p>
+        <span>{{message.content}}</span>
       </div>
     </transition>
   </div>
@@ -125,6 +128,7 @@
 import VueRecaptcha from "vue-recaptcha";
 import { setTimeout } from "timers";
 import axios from "axios";
+require("clientjs");
 export default {
   components: {
     VueRecaptcha
@@ -145,9 +149,9 @@ export default {
         commute: 3,
         standard: 3
       },
+      errorMessage: "",
       recaptcha: {
-        recaptchaVerified: false,
-        pleaseTickRecaptchaMessage: ""
+        recaptchaVerified: false
       }
     };
   },
@@ -166,55 +170,58 @@ export default {
       this.step = step;
     },
     markRecaptchaAsVerified(response) {
-      this.recaptcha.pleaseTickRecaptchaMessage = "";
+      this.errorMessage = "";
       this.recaptcha.recaptchaVerified = true;
       console.log(response);
     },
     addRate() {
       if (!this.recaptcha.recaptchaVerified) {
-        this.recaptcha.pleaseTickRecaptchaMessage = "Please tick recaptcha.";
-        console.log("nono");
-
-        return true; // prevent form from submitting
+        this.errorMessage = "Zaznacz najpierw recaptcha";
+        return true;
       }
       axios
         .get(
           `https://school-248910.appspot.com/rates/userprint/${this.userPrint}`
         )
         .then(data => {
-          if (data.data.length === 0 && this.rateValues.content.length > 5) {
-            axios
-              .post(
-                `https://school-248910.appspot.com/rates/${this.school._id}`,
-                {
-                  user_fingerprint: this.userPrint,
-                  content: this.rateValues.content,
-                  flow: this.rateValues.flow,
-                  teachers: this.rateValues.teachers,
-                  commute: this.rateValues.commute,
-                  standard: this.rateValues.standard
-                }
-              )
-              .then(() => {
-                this.$emit("updateRatesList");
-                this.message = {
-                  content: "Dodano twoją opinię!",
-                  success: true
-                };
-                setTimeout(() => {
-                  this.closeModal();
-                }, 2500);
-              });
-          } else {
-            this.message = {
-              content:
-                "W trosce o wiarygodnośc mozesz wystawic tylko 1 opinię 1 szkole",
-              error: true
-            };
+          if (this.rateValues.content.length > 5) {
+            this.errorMessage = "";
+            if (data.data.length === 0) {
+              axios
+                .post(
+                  `https://school-248910.appspot.com/rates/${this.school._id}`,
+                  {
+                    user_fingerprint: this.userPrint,
+                    content: this.rateValues.content,
+                    flow: this.rateValues.flow,
+                    teachers: this.rateValues.teachers,
+                    commute: this.rateValues.commute,
+                    standard: this.rateValues.standard
+                  }
+                )
+                .then(() => {
+                  this.$emit("updateRatesList");
+                  this.message = {
+                    content: "Dodano twoją opinię!",
+                    success: true
+                  };
+                  setTimeout(() => {
+                    this.closeModal();
+                  }, 2500);
+                });
+            } else {
+              this.message = {
+                content:
+                  "W trosce o wiarygodnośc mozesz wystawic tylko 1 opinię 1 szkole",
+                error: true
+              };
 
-            setTimeout(() => {
-              this.closeModal();
-            }, 3000);
+              setTimeout(() => {
+                this.closeModal();
+              }, 3000);
+            }
+          } else {
+            this.errorMessage = "Treść musi mieć min. 5 znaków";
           }
         });
     }
@@ -265,6 +272,13 @@ export default {
     padding: 20px 0;
     .recaptcha {
       margin: auto;
+    }
+    .error-message {
+      color: #fff;
+      padding: 5px 10px;
+      background: #f14848;
+      border-radius: 3px;
+      border: none;
     }
   }
   .modal-header {

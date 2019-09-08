@@ -1,34 +1,42 @@
 <template>
   <keep-alive>
     <div class="homeWrapper">
-      <header class="main-header">
-        <div class="main-header__content">
-          <h1>Znajdź szkołę o jakiej marzysz</h1>
-          <section class="search-section">
-            <div>
-              <label for="city-select" class="search-section__label">MIASTO</label>
-              <select
-                @change="getSchoolList"
-                v-model="city"
-                id="city-select"
-                class="search-section__input"
-              >
-                <option value="Gdynia">Gdynia</option>
-                <option value="Sopot">Sopot</option>
-                <option value="Gdańsk">Gdańsk</option>
-              </select>
+      <transition name="special-header">
+        <header v-if="loaded" class="main-header">
+          <transition name="fade">
+            <div v-if="loaded" class="main-header__content">
+              <h1>Znajdź szkołę o jakiej marzysz</h1>
+              <section class="search-section">
+                <div>
+                  <label for="city-select" class="search-section__label">MIASTO</label>
+                  <select
+                    @change="getSchoolList"
+                    v-model="city"
+                    id="city-select"
+                    class="search-section__input"
+                  >
+                    <option value="Gdynia">Gdynia</option>
+                    <option value="Sopot">Sopot</option>
+                    <option value="Gdańsk">Gdańsk</option>
+                  </select>
+                </div>
+              </section>
             </div>
-          </section>
-        </div>
-      </header>
+          </transition>
+        </header>
+      </transition>
       <main>
         <section class="search-results">
-          <h2 :city="city" class="city-name">{{city}}</h2>
+          <transition name="slide-up" mode="out-in">
+            <h2 v-if="loaded" :city="city" class="city-name" :key="city">{{city}}</h2>
+          </transition>
           <discover-section />
-          <div class="all-schools" v-if="allSchools" :key="keyToRender">
-            <h3>Wszystkie szkoły ({{allSchools.length}})</h3>
-            <school-list v-if="allSchools" :schoolList="allSchools" />
-          </div>
+          <transition name="slide">
+            <div class="all-schools" v-if="allSchools" :key="keyToRender">
+              <h3>Wszystkie szkoły ({{allSchools.length}})</h3>
+              <school-list :schoolList="allSchools" />
+            </div>
+          </transition>
         </section>
       </main>
     </div>
@@ -45,11 +53,12 @@ export default {
   },
   data() {
     return {
-      city: "Gdynia",
+      city: "",
       allSchools: [],
       discoverReady: false,
       keyToRender: 0,
-      logoType: "logo_small.svg"
+      logoType: "logo_small.svg",
+      loaded: false
     };
   },
   props: {
@@ -60,6 +69,7 @@ export default {
     }
   },
   mounted() {
+    this.loaded = true;
     if (window.screen.width < 720) {
       this.logoType = "@/assets/logo_small.svg";
     } else {
@@ -89,6 +99,8 @@ export default {
   align-items: center;
   flex-direction: column;
   .main-header {
+    position: relative;
+    top: 0;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -99,7 +111,7 @@ export default {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-image: linear-gradient(to top, rgba(#000, 0.6), rgba(#000, 0.9)),
+    background-image: linear-gradient(to top, rgba(#000, 0.9), rgba(#000, 0.8)),
       url("../assets/header.jpg");
     .main-header__content {
       margin: auto;
@@ -145,7 +157,6 @@ export default {
     position: relative;
     width: 100vw;
     padding: 20px;
-
     .search-results {
       display: flex;
       flex-direction: column;
@@ -155,20 +166,31 @@ export default {
         position: relative;
         width: 100%;
         text-align: center;
+        z-index: -999;
         &::after {
-          content: attr(city);
+          content: "";
           position: absolute;
-          font-family: "Sacramento", cursive;
-          top: -60px;
+          top: -10px;
           left: 0;
           right: 0;
-          margin-left: auto;
-          margin-right: auto;
-          color: #16dea3;
-          z-index: -99;
-          font-size: 6rem;
-          opacity: 0.5;
-          width: 100%;
+          margin: auto;
+          height: 200px;
+          width: 3px;
+          background: #000;
+          transform: rotatex(180deg);
+          transform-origin: top;
+        }
+        &::before {
+          content: "";
+          position: absolute;
+          top: -10px;
+          left: 0;
+          right: 0;
+          margin: auto;
+          background: #000;
+          width: 12px;
+          height: 12px;
+          border-radius: 100px;
         }
       }
       .all-schools {

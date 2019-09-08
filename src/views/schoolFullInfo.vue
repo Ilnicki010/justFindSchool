@@ -10,12 +10,10 @@
         <span>{{school.adress}} | {{school.city}}</span>
       </div>
     </header>
-    <div class="content-wrapper">
+    <div v-if="loaded" class="content-wrapper">
       <button @click="openModal" class="btn btn--primary btn--rounded">Dodaj anonimową opinię</button>
       <div class="content-wrapper__content">
-        <transition name="popup">
-          <rate-knobs class="rateAvg-knobs" v-if="school.ratesAvg" :rateValues="school.ratesAvg" />
-        </transition>
+        <rate-knobs class="rateAvg-knobs" v-if="school.ratesAvg" :rateValues="school.ratesAvg" />
         <div class="all-rates">
           <h2>Opinie ({{ratesArr.length}})</h2>
           <transition name="slide">
@@ -27,7 +25,7 @@
         </div>
       </div>
     </div>
-    <transition name="slide">
+    <transition name="slide-fast">
       <add-rate-modal
         :school="school"
         @updateRatesList="getRates"
@@ -104,10 +102,6 @@ export default {
     this.loaded = true;
 
     this.getSchool();
-    // window.addEventListener("scroll", this.onScroll);
-  },
-  beforeDestroy() {
-    window.removeEventListener("scroll", this.onScroll);
   }
 };
 </script>
@@ -181,6 +175,7 @@ export default {
       background: linear-gradient(to left, #0d8561, #0d8561);
       animation: shake 5s infinite linear;
     }
+
     .content-wrapper__content {
       margin-top: 5vh;
       position: relative;

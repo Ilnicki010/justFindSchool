@@ -1,19 +1,35 @@
 <template>
   <div id="app">
     <keep-alive>
-      <router-view v-if="$route.name === 'home'"></router-view>
+      <router-view v-if="$route.meta.keepAlive"></router-view>
     </keep-alive>
-    <router-view v-if="$route.name != 'home'"></router-view>
+    <router-view v-if="!$route.meta.keepAlive"></router-view>
   </div>
 </template>
 <script>
 export default {
   mounted() {
-    console.log(this.$route.name);
+    console.log(this.$route.meta.keepAlive);
   }
 };
 </script>
 <style lang="scss">
+.main-menu {
+  position: absolute;
+  top: 20px;
+  right: 100px;
+  font-size: 14px;
+  width: 50%;
+  font-weight: 100;
+  a {
+    color: #fff;
+  }
+  ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+  }
+}
 *,
 *:before,
 *:after {
@@ -154,6 +170,10 @@ html {
 //transitons
 .slide-enter-active,
 .slide-right-enter-active .slide-left-enter-active {
+  transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+}
+.slide-fast-enter-active,
+.slide-fast-leave-active {
   transition: transform 0.2s ease-out, opacity 0.2s ease-out;
 }
 .slide-leave-active,
@@ -162,10 +182,14 @@ html {
   transition: transform 0.2s ease-in, opacity 0.2s ease-in;
 }
 .slide-enter,
+.slide-fast-enter,
+.slide-fast-leave-to,
 .slide-leave-to {
   transform: translateY(70vh);
 }
 .slide-enter-to,
+.slide-fast-enter-to,
+.slide-fast-leave,
 .slide-leave {
   transform: translateY(0);
 }
@@ -206,5 +230,40 @@ html {
 }
 .popup-enter-to {
   transform: scale(1);
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s 0.5s ease-out;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+.fade-enter-to,
+.fade-leave-to {
+  opacity: 1;
+}
+.special-header-enter-active {
+  transition: all 0.2s ease-out;
+}
+.special-header-enter {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+.special-header-enter-to {
+  opacity: 1;
+  transform: translateY(0);
+}
+.slide-up-leave-active,
+.slide-up-enter-active {
+  transition: 0.4s 0.2s ease-out;
+}
+.slide-up-enter {
+  opacity: 0;
+  transform: translateY(-20vh);
+}
+.slide-up-enter-to {
+  opacity: 1;
+  transform: translateY(0);
 }
 </style>
