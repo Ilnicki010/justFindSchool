@@ -3,6 +3,7 @@
     <div class="homeWrapper">
       <transition name="special-header">
         <header v-if="loaded" class="main-header">
+          <router-link to="/faq" class="btn btn--ghost-green faq-btn">FAQ</router-link>
           <transition name="fade">
             <div v-if="loaded" class="main-header__content">
               <h1>Znajdź szkołę o jakiej marzysz</h1>
@@ -103,9 +104,10 @@ export default {
     top: 0;
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     flex-direction: column;
     width: 100%;
-    height: 50vh;
+    height: 60vh;
     color: #fff;
     background: #000;
     background-size: cover;
@@ -113,9 +115,16 @@ export default {
     background-repeat: no-repeat;
     background-image: linear-gradient(to top, rgba(#000, 0.9), rgba(#000, 0.8)),
       url("../assets/header.jpg");
+    .faq-btn {
+      position: absolute;
+      top: 20px;
+      right: 7.5%;
+      z-index: 9999;
+      max-width: 70px;
+    }
     .main-header__content {
-      margin: auto;
       padding: 0 10px;
+      margin-bottom: 30px;
       border-radius: 5px;
       width: 85%;
       display: flex;

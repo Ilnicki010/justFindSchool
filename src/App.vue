@@ -14,22 +14,6 @@ export default {
 };
 </script>
 <style lang="scss">
-.main-menu {
-  position: absolute;
-  top: 20px;
-  right: 100px;
-  font-size: 14px;
-  width: 50%;
-  font-weight: 100;
-  a {
-    color: #fff;
-  }
-  ul {
-    list-style: none;
-    display: flex;
-    justify-content: space-around;
-  }
-}
 *,
 *:before,
 *:after {
