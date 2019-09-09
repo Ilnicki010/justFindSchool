@@ -121,26 +121,35 @@
         <span>{{message.content}}</span>
       </div>
     </transition>
+    <message-component
+      v-if="message.value"
+      :messageType="message.type"
+      :messageValue="message.value"
+    />
   </div>
 </template>
 
 <script>
 import VueRecaptcha from "vue-recaptcha";
+import messageComponent from "@/components/messageComponent";
 import { setTimeout } from "timers";
 import axios from "axios";
 
 require("clientjs");
 export default {
   components: {
-    VueRecaptcha
+    VueRecaptcha,
+    messageComponent
   },
   data() {
     return {
       step: 1,
       message: {
-        content: "",
-        error: false,
-        success: false
+        value: "",
+        type: {
+          error: false,
+          success: false
+        }
       },
       userPrint: null,
       rateValues: {
@@ -205,20 +214,17 @@ export default {
                 .then(() => {
                   this.$emit("updateRatesList");
                   this.$emit("addedOpinion");
-                  this.message = {
-                    content: "Dodano twoją opinię!",
-                    success: true
-                  };
+                  this.message.value = "Dodano twoją opinię!";
+                  this.message.type.success = true;
+
                   setTimeout(() => {
                     this.closeModal();
                   }, 2500);
                 });
             } else {
-              this.message = {
-                content:
-                  "W trosce o wiarygodnośc mozesz wystawic tylko 1 opinię 1 szkole",
-                error: true
-              };
+              this.message.value =
+                "W trosce o wiarygodnośc mozesz wystawic tylko 1 opinię 1 szkole";
+              this.message.type.error = true;
 
               setTimeout(() => {
                 this.closeModal();

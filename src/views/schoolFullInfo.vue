@@ -15,7 +15,6 @@
         @click="openModal"
         class="btn btn--primary btn--rounded"
         :class="{inactive:oldUser}"
-        :disabled="oldUser"
       >Dodaj anonimową opinię</button>
       <div class="content-wrapper__content">
         <rate-knobs class="rateAvg-knobs" v-if="school.ratesAvg" :rateValues="school.ratesAvg" />
@@ -39,6 +38,13 @@
         v-if="rateModal"
       />
     </transition>
+    <transition name="slide">
+      <message-component
+        v-if="showMessage"
+        :messageType="message.type"
+        :messageValue="message.value"
+      />
+    </transition>
   </div>
 </template>
 
@@ -47,6 +53,7 @@ import axios from "axios";
 import rateKnobs from "@/components/rateKnobs";
 import addRateModal from "@/components/addRateModal";
 import ratesList from "@/components/ratesList";
+import messageComponent from "@/components/messageComponent";
 import { setTimeout } from "timers";
 require("clientjs");
 let i = 0;
@@ -55,7 +62,8 @@ export default {
   components: {
     rateKnobs,
     addRateModal,
-    ratesList
+    ratesList,
+    messageComponent
   },
   props: {
     uid: {
@@ -71,7 +79,15 @@ export default {
       rateModal: false,
       loaded: false,
       userPrint: "",
-      oldUser: false
+      oldUser: false,
+      showMessage: false,
+      message: {
+        type: {
+          error: null,
+          success: null
+        },
+        value: ""
+      }
     };
   },
   methods: {
@@ -97,8 +113,18 @@ export default {
       last = window.scrollY;
     },
     openModal() {
-      this.rateModal = true;
-      document.body.style.overflowY = "hidden";
+      if (!this.oldUser) {
+        this.rateModal = true;
+        document.body.style.overflowY = "hidden";
+      } else {
+        this.showMessage = true;
+        this.message.type.error = true;
+        this.message.value =
+          "W trosce o wiarygodnośc mozesz wystawic tylko 1 opinię 1 szkole";
+        setTimeout(() => {
+          this.showMessage = false;
+        }, 2500);
+      }
     },
     closeModal() {
       this.rateModal = false;
@@ -211,6 +237,7 @@ export default {
       border: none;
       background: linear-gradient(to left, #0d8561, #0d8561);
       animation: shake 5s infinite linear;
+      transition: 0.4s linear;
     }
     .inactive {
       background: #000;

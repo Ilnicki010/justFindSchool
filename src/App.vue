@@ -164,6 +164,7 @@ html {
 }
 //transitons
 .slide-enter-active,
+.slide-leave-active,
 .slide-right-enter-active .slide-left-enter-active {
   transition: transform 0.6s ease-out, opacity 0.6s ease-out;
 }
@@ -171,7 +172,6 @@ html {
 .slide-fast-leave-active {
   transition: transform 0.2s ease-out, opacity 0.2s ease-out;
 }
-.slide-leave-active,
 .slide-right-leave-active,
 .slide-left-leave-active {
   transition: transform 0.2s ease-in, opacity 0.2s ease-in;
