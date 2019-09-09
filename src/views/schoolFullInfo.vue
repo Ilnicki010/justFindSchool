@@ -11,7 +11,12 @@
       </div>
     </header>
     <div v-if="loaded" class="content-wrapper">
-      <button @click="openModal" class="btn btn--primary btn--rounded">Dodaj anonimową opinię</button>
+      <button
+        @click="openModal"
+        class="btn btn--primary btn--rounded"
+        :class="{inactive:oldUser}"
+        :disabled="oldUser"
+      >Dodaj anonimową opinię</button>
       <div class="content-wrapper__content">
         <rate-knobs class="rateAvg-knobs" v-if="school.ratesAvg" :rateValues="school.ratesAvg" />
         <div class="all-rates">
@@ -29,6 +34,7 @@
       <add-rate-modal
         :school="school"
         @updateRatesList="getRates"
+        @addedOpinion="isUserNew"
         @closeModal="closeModal"
         v-if="rateModal"
       />
@@ -41,6 +47,8 @@ import axios from "axios";
 import rateKnobs from "@/components/rateKnobs";
 import addRateModal from "@/components/addRateModal";
 import ratesList from "@/components/ratesList";
+import { setTimeout } from "timers";
+require("clientjs");
 let i = 0;
 let last = 0;
 export default {
@@ -61,7 +69,9 @@ export default {
       school: null,
       ratesArr: [],
       rateModal: false,
-      loaded: false
+      loaded: false,
+      userPrint: "",
+      oldUser: false
     };
   },
   methods: {
@@ -93,16 +103,41 @@ export default {
     closeModal() {
       this.rateModal = false;
       document.body.style.overflowY = "scroll";
+    },
+    isUserNew() {
+      axios
+        .get(
+          `https://school-248910.appspot.com/rates/userprint/${this.userPrint}`
+        )
+        .then(data => {
+          console.log(data.data);
+          if (data.data.length === 0) {
+            this.oldUser = false;
+          } else {
+            this.oldUser = true;
+          }
+        });
     }
   },
   watch: {
     school() {
       this.getRates();
+    },
+    userPrint() {
+      this.isUserNew();
     }
   },
   mounted() {
-    this.loaded = true;
+    if (!this.userPrint) {
+      let client = new ClientJS();
+      setTimeout(() => {
+        this.userPrint = client.getFingerprint();
+      }, 500);
+    } else {
+      this.isUserNew();
+    }
 
+    this.loaded = true;
     this.getSchool();
   }
 };
@@ -176,6 +211,17 @@ export default {
       border: none;
       background: linear-gradient(to left, #0d8561, #0d8561);
       animation: shake 5s infinite linear;
+    }
+    .inactive {
+      background: #000;
+      animation: none;
+      display: flex;
+      justify-content: space-around;
+      cursor: default;
+      &::after {
+        content: url("../assets/lock-icon.svg");
+        position: relative;
+      }
     }
 
     .content-wrapper__content {

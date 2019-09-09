@@ -177,6 +177,7 @@ export default {
       console.log(response);
     },
     addRate() {
+      console.log(this.userPrint);
       if (!this.recaptcha.recaptchaVerified) {
         this.errorMessage = "Zaznacz najpierw recaptcha";
         return true;
@@ -203,6 +204,7 @@ export default {
                 )
                 .then(() => {
                   this.$emit("updateRatesList");
+                  this.$emit("addedOpinion");
                   this.message = {
                     content: "Dodano twoją opinię!",
                     success: true

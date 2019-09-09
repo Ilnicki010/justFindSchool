@@ -29,7 +29,7 @@
       <main>
         <section class="search-results">
           <transition name="slide-up" mode="out-in">
-            <h2 v-if="loaded" :city="city" class="city-name" :key="city">{{city}}</h2>
+            <h2 v-if="city" :city="city" class="city-name" :key="city">{{city}}</h2>
           </transition>
           <discover-section />
           <transition name="slide">
