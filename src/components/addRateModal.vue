@@ -22,7 +22,7 @@
                 step="1"
                 value="3"
               />
-              <span id="teachersValue">{{rateValues.teachers}}</span>
+              <span id="teachersValue">{{rateValues.teachers}} / 6</span>
             </div>
           </div>
           <div class="inputs__input">
@@ -39,7 +39,7 @@
                 step="1"
                 value="3"
               />
-              <span>{{rateValues.flow}}</span>
+              <span>{{rateValues.flow}} / 6</span>
             </div>
           </div>
           <div class="inputs__input">
@@ -56,7 +56,7 @@
                 step="1"
                 value="3"
               />
-              <span>{{rateValues.standard}}</span>
+              <span>{{rateValues.standard}} / 6</span>
             </div>
           </div>
           <div class="inputs__input">
@@ -73,7 +73,7 @@
                 step="1"
                 value="3"
               />
-              <span>{{rateValues.commute}}</span>
+              <span>{{rateValues.commute}} / 6</span>
             </div>
           </div>
         </div>

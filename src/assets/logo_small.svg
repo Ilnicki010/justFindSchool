@@ -3,19 +3,20 @@
         <clipPath id="b">
             <rect width="173" height="170"/>
         </clipPath>
+        <style type="text/css">
+            text { font-family:&apos;Nunito&apos;, sans-serif; }
+        </style>
     </defs>
     <g id="a" clip-path="url(#b)">
         <g transform="translate(-101 -56)">
-            <text fill="#fff" font-family="Nunito-SemiBold, Nunito" font-size="36" font-weight="600" transform="translate(124 115)">
+            <text fill="#fff" font-family="Nunito" font-size="36" font-weight="600" transform="translate(124 115)">
                 <tspan x="0" y="0">Just</tspan><tspan x="0" y="40">Find</tspan><tspan x="0" y="80">School</tspan>
             </text>
-            <text fill="#16dea3" font-family="Nunito-Regular, Nunito" font-size="34" transform="translate(251 139) rotate(-90)">
+            <text fill="#16dea3" font-family="Nunito" font-size="34" transform="translate(251 139) rotate(-90)">
                 <tspan x="0" y="0">.com</tspan>
             </text>
-            <line y2="143" fill="none" stroke="#16dea3" stroke-linecap="round" stroke-width="3.5" transform="translate(112.5 71.5)"/>
-            <line x2="137" fill="none" stroke="#16dea3" stroke-linecap="round" stroke-width="3.5" transform="translate(112.5 71.5)"/>
-            <line x2="137" fill="none" stroke="#16dea3" stroke-linecap="round" stroke-width="3.5" transform="translate(112.5 214.5)"/>
-            <line y2="72" fill="none" stroke="#16dea3" stroke-linecap="round" stroke-width="3.5" transform="translate(249.5 141.5)"/>
+            <line y2="143" fill="none" stroke="#16dea3" stroke-linecap="round" stroke-width="3.5" transform="translate(102.5 71.5)"/>
+<!--<line x2="137" fill="none" stroke="#16dea3" stroke-linecap="round" stroke-width="3.5" transform="translate(112.5 68.5)"/> <line x2="137" fill="none" stroke="#16dea3" stroke-linecap="round" stroke-width="3.5" transform="translate(112.5 214.5)"/> <line y2="72" fill="none" stroke="#16dea3" stroke-linecap="round" stroke-width="3.5" transform="translate(249.5 141.5)"/>-->
         </g>
     </g>
 </svg>
