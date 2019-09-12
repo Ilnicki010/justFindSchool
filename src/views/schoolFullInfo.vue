@@ -58,6 +58,12 @@ import { setTimeout } from "timers";
 require("clientjs");
 let i = 0;
 let last = 0;
+const authorizationBasic = window.btoa(
+  "admin" + ":" + process.env.VUE_APP_API_KEY
+);
+const config = {
+  headers: { Authorization: "Basic " + authorizationBasic }
+};
 export default {
   components: {
     rateKnobs,
@@ -93,7 +99,7 @@ export default {
   methods: {
     getSchool() {
       axios
-        .get(`https://school-248910.appspot.com/schools?uid=${this.uid}`)
+        .get(`${process.env.VUE_APP_API_URL}/schools?uid=${this.uid}`, config)
         .then(data => {
           this.school = data.data[0];
         });
@@ -101,7 +107,8 @@ export default {
     getRates() {
       axios
         .get(
-          `https://school-248910.appspot.com/rates/school/${this.school._id}`
+          `${process.env.VUE_APP_API_URL}/rates/school/${this.school._id}`,
+          config
         )
         .then(data => {
           this.ratesArr = data.data;
@@ -133,7 +140,8 @@ export default {
     isUserNew() {
       axios
         .get(
-          `https://school-248910.appspot.com/rates/userprint/${this.userPrint}`
+          `${process.env.VUE_APP_API_URL}rates/userprint/${this.userPrint}`,
+          config
         )
         .then(data => {
           console.log(data.data);

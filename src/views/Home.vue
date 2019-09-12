@@ -10,7 +10,10 @@
         </nav>
         <transition name="fade">
           <div v-if="loaded" class="main-header__content">
-            <h1>Znajdź szkołę o jakiej marzysz</h1>
+            <h1>
+              Zamień się rolami i
+              <span>oceń swoją szkołę</span>
+            </h1>
             <section class="search-section">
               <div>
                 <label for="city-select" class="search-section__label">MIASTO</label>
@@ -88,9 +91,15 @@ export default {
   },
   methods: {
     getSchoolList() {
+      const authorizationBasic = window.btoa(
+        "admin" + ":" + process.env.VUE_APP_API_KEY
+      );
+      const config = {
+        headers: { Authorization: "Basic " + authorizationBasic }
+      };
       this.keyToRender += 1;
       axios
-        .get(`https://school-248910.appspot.com/schools?city=${this.city}`)
+        .get(`${process.env.VUE_APP_API_URL}/schools?city=${this.city}`, config)
         .then(data => {
           this.allSchools = data.data;
           console.log(this.allSchools);
@@ -120,7 +129,8 @@ export default {
     background-position: center;
     background-repeat: no-repeat;
     background-image: linear-gradient(to top, rgba(#000, 0.9), rgba(#000, 0.8)),
-      url("../assets/header.jpg");
+      url("https://ik.imagekit.io/ugqakuw7ym/header_O2iECjTEH.jpg");
+
     .main-header__nav {
       position: absolute;
       display: flex;

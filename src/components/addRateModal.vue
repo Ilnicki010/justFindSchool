@@ -134,8 +134,13 @@ import VueRecaptcha from "vue-recaptcha";
 import messageComponent from "@/components/messageComponent";
 import { setTimeout } from "timers";
 import axios from "axios";
-
 require("clientjs");
+const authorizationBasic = window.btoa(
+  "admin" + ":" + process.env.VUE_APP_API_KEY
+);
+const config = {
+  headers: { Authorization: "Basic " + authorizationBasic }
+};
 export default {
   components: {
     VueRecaptcha,
@@ -193,7 +198,8 @@ export default {
       }
       axios
         .get(
-          `https://school-248910.appspot.com/rates/userprint/${this.userPrint}`
+          `${process.env.VUE_APP_API_URL}/rates/userprint/${this.userPrint}`,
+          config
         )
         .then(data => {
           if (this.rateValues.content.length > 5) {
@@ -201,7 +207,7 @@ export default {
             if (data.data.length === 0) {
               axios
                 .post(
-                  `https://school-248910.appspot.com/rates/${this.school._id}`,
+                  `${process.env.VUE_APP_API_URL}/rates/${this.school._id}`,
                   {
                     user_fingerprint: this.userPrint,
                     content: this.rateValues.content,
@@ -209,7 +215,8 @@ export default {
                     teachers: this.rateValues.teachers,
                     commute: this.rateValues.commute,
                     standard: this.rateValues.standard
-                  }
+                  },
+                  config
                 )
                 .then(() => {
                   this.$emit("updateRatesList");

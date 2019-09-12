@@ -30,6 +30,7 @@ export default {
   align-items: center;
   font-size: 0.9rem;
   width: 100%;
+  z-index: 99999;
   bottom: 0;
   background: #424851;
   color: #fff;
