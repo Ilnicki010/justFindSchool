@@ -67,7 +67,6 @@ export default {
       allSchools: [],
       discoverReady: false,
       keyToRender: 0,
-      logoType: "logo_small.svg",
       loaded: false
     };
   },
@@ -80,12 +79,6 @@ export default {
   },
   mounted() {
     this.loaded = true;
-    if (window.screen.width < 720) {
-      this.logoType = "@/assets/logo_small.svg";
-    } else {
-      this.logoType = "logo_big.svg";
-    }
-    console.log(this.logoType);
     this.city = this.cityName;
     this.getSchoolList();
   },
