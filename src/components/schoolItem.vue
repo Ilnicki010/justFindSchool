@@ -20,7 +20,6 @@
 
 <script>
 import rateKnobs from "@/components/rateKnobs";
-import { ContentLoader } from "vue-content-loader";
 import { setTimeout } from "timers";
 export default {
   props: {
@@ -36,8 +35,7 @@ export default {
     };
   },
   components: {
-    rateKnobs,
-    ContentLoader
+    rateKnobs
   },
   mounted() {
     setTimeout(() => {
