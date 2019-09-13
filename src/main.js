@@ -1,10 +1,14 @@
 import Vue from 'vue';
-import VueLazyload from 'vue-lazyload'
+import VueAnalytics from 'vue-analytics';
+import VueLazyload from 'vue-lazyload';
 import App from './App.vue';
 import router from './router';
 
 
 Vue.use(VueLazyload);
+Vue.use(VueAnalytics, {
+  id: 'UA-147954275-1',
+});
 
 Vue.config.productionTip = false;
 
