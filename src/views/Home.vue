@@ -95,7 +95,6 @@ export default {
         .get(`${process.env.VUE_APP_API_URL}/schools?city=${this.city}`, config)
         .then(data => {
           this.allSchools = data.data;
-          console.log(this.allSchools);
         });
     }
   }

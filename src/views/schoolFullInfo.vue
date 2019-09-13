@@ -144,7 +144,6 @@ export default {
           config
         )
         .then(data => {
-          console.log(data.data);
           if (data.data.length === 0) {
             this.oldUser = false;
           } else {

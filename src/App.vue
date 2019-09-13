@@ -7,11 +7,6 @@
   </div>
 </template>
 <script>
-export default {
-  mounted() {
-    console.log(this.$route.meta.keepAlive);
-  }
-};
 </script>
 <style lang="scss">
 #app {

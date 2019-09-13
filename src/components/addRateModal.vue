@@ -213,7 +213,6 @@ export default {
     markRecaptchaAsVerified(response) {
       this.errorMessage = "";
       this.recaptcha.recaptchaVerified = true;
-      console.log(response);
     },
     addRate() {
       if (this.checkForm()) {
@@ -368,7 +367,7 @@ export default {
     }
     .textarea-content {
       width: 100%;
-      height: 150px;
+      height: 110px;
       padding: 10px;
       border: #16dea3 1px solid;
       border-radius: 5px;
