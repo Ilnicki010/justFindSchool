@@ -5,7 +5,11 @@
       <p class="rate__content">
         <span>{{rate.content}}</span>
       </p>
-      <span class="rate__date">Dodano: {{getFullDate(rate.created_at)}}</span>
+      <div class="rate__info">
+        <span class="info__date">Dodano: {{getFullDate(rate.created_at)}}</span>
+        <span class="info__class">Uczeń klasy {{(rate.user_class)}}</span>
+      </div>
+
       <img class="pattern" src="../assets/pattern.svg" alt="pattern" />
     </div>
   </div>
@@ -51,10 +55,17 @@ export default {
     .pattern {
       display: none;
     }
-    .rate__date {
-      opacity: 0.7;
-      font-size: 0.8rem;
-      padding-left: 10px;
+    .rate__info {
+      .info__date,
+      .info__class {
+        opacity: 0.7;
+        font-size: 0.8rem;
+        padding: 5px;
+      }
+      .info__class {
+        border-bottom: #16dea3 1px solid;
+        color: #16dea3;
+      }
     }
     .rate__content {
       padding: 5px 10px 0;
@@ -86,17 +97,26 @@ export default {
         left: 0;
         border-radius: 0 0 0 10px;
       }
-      .rate__date {
+      .rate__info {
         flex: 1;
+        display: flex;
+        flex-direction: column-reverse;
+        text-align: center;
+        align-items: center;
+        .info__class {
+          border: #16dea3 1px solid;
+          border-radius: 3px;
+          color: #16dea3;
+        }
+        .info__date {
+          white-space: nowrap;
+        }
       }
       .rate__content {
         flex: 4;
         margin: 0 20px;
         padding: 0 10px;
         border-left: 1px solid #16dea3;
-        // span {
-        //   border-bottom: 1px dotted #16dea3;
-        // }
       }
     }
   }

@@ -9,7 +9,7 @@
         </select>
       </div>
       <div>
-        <label for="city-select" class="search-section__label">Wyszukaj</label>
+        <label for="school-search" class="search-section__label">Wyszukaj</label>
         <input
           v-model="searchInput"
           class="sort-select"

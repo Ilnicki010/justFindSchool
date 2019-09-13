@@ -140,7 +140,7 @@ export default {
     isUserNew() {
       axios
         .get(
-          `${process.env.VUE_APP_API_URL}rates/userprint/${this.userPrint}`,
+          `${process.env.VUE_APP_API_URL}/rates/userprint/${this.userPrint}`,
           config
         )
         .then(data => {

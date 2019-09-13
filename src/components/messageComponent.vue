@@ -58,7 +58,7 @@ export default {
   box-shadow: 0 10px 15px rgba(#f14848, 0.2);
 }
 .message--success {
-  background: green;
-  box-shadow: 0 10px 15px rgba(green, 0.2);
+  background: #16dea3;
+  box-shadow: 0 10px 15px rgba(#16dea3, 0.2);
 }
 </style>
