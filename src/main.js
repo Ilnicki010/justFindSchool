@@ -8,7 +8,7 @@ import router from './router';
 Vue.use(VueLazyload);
 Vue.use(VueAnalytics, {
   id: 'UA-147954275-1',
-  checkDuplicatedScript: true,
+  router,
 });
 
 Vue.config.productionTip = false;
