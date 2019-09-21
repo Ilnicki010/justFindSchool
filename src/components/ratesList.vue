@@ -7,7 +7,13 @@
       </p>
       <div class="rate__info">
         <span class="info__date">Dodano: {{getFullDate(rate.created_at)}}</span>
-        <span class="info__class">Uczeń klasy {{(rate.user_class)}}</span>
+        <div v-if="rate.user_class !== 'none'">
+          <span
+            v-if="isClass(rate.user_class)"
+            class="info__class"
+          >Uczeń klasy {{(rate.user_class)}}</span>
+          <span v-else class="info__class">{{(rate.user_class)}}</span>
+        </div>
       </div>
 
       <img class="pattern" src="../assets/pattern.svg" alt="pattern" />
@@ -31,8 +37,16 @@ export default {
     getFullDate(date) {
       let newDate = new Date(date);
       return `${newDate.getDay()}/${newDate.getMonth()}/${newDate.getFullYear()}`;
+    },
+    isClass(user_class) {
+      if (user_class === "I" || user_class === "II" || user_class === "III") {
+        return true;
+      } else if (user_class === "Rodzic" || user_class === "Absolwent") {
+        return false;
+      }
     }
-  }
+  },
+  computed: {}
 };
 </script>
 
@@ -56,12 +70,16 @@ export default {
       display: none;
     }
     .rate__info {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
       .info__date,
       .info__class {
         opacity: 0.7;
         font-size: 0.8rem;
         padding: 5px;
       }
+
       .info__class {
         border-bottom: #16dea3 1px solid;
         color: #16dea3;

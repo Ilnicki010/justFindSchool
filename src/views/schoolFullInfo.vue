@@ -161,6 +161,7 @@ export default {
     }
   },
   mounted() {
+    this.loaded = true;
     if (!this.userPrint) {
       let client = new ClientJS();
       setTimeout(() => {
@@ -169,8 +170,6 @@ export default {
     } else {
       this.isUserNew();
     }
-
-    this.loaded = true;
     this.getSchool();
   }
 };

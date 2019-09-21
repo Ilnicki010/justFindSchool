@@ -60,7 +60,7 @@
             </div>
           </div>
           <div class="inputs__input">
-            <label for="addTeachersRate">Dojazd komunikacją miejską</label>
+            <label for="addTeachersRate">Dojazd</label>
             <div class="input__slider">
               <input
                 v-model="rateValues.commute"
@@ -96,13 +96,15 @@
           ></textarea>
         </div>
         <div class="class-select">
-          <label for="class-select" class="class-select__label">W jakiej jesteś klasie?</label>
+          <label for="class-select" class="class-select__label">W której jesteś klasie?</label>
           <select v-model="rateValues.class" id="class-select" class="class-select__input">
             <option value selected disabled hidden>Wybierz</option>
             <option value="I">I LO</option>
             <option value="II">II LO</option>
             <option value="III">III LO</option>
             <option value="Absolwent">Absolwent</option>
+            <option value="Rodzic">Rodzic</option>
+            <option value="none">Wole nie podawać</option>
           </select>
         </div>
         <div class="buttons-captacha-wrapper">
@@ -117,7 +119,7 @@
             <button @click="addRate" class="btn btn--primary">Dodaj!</button>
           </div>
           <div v-if="errors.length > 0" class="error-message">
-            <ul v-for="error in errors" :key="error.indexOf(error)">
+            <ul v-for="(error,index) in errors" :key="`message-${index}`">
               <li>{{error}}</li>
             </ul>
           </div>

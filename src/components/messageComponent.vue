@@ -33,9 +33,6 @@ export default {
   },
   beforeDestroy() {
     this.show = false;
-    this.messageType.success = null;
-    this.messageType.error = null;
-    this.messageValue = "";
   }
 };
 </script>

@@ -67,6 +67,7 @@ export default {
     .image {
       width: 100px;
       height: 100%;
+      flex: 1;
       background-position: center;
       background-size: cover;
       background-repeat: no-repeat;
@@ -74,7 +75,7 @@ export default {
     }
     .content {
       padding: 0 20px;
-      flex: 3;
+      flex: 2;
       display: flex;
       flex-direction: column;
       height: 100%;
@@ -82,6 +83,11 @@ export default {
       h4,
       p {
         margin: 0;
+      }
+
+      p {
+        font-size: 0.9rem;
+        opacity: 0.9;
       }
     }
   }
@@ -106,9 +112,11 @@ export default {
       justify-content: space-between;
       align-items: flex-start;
       .content {
-        padding: 15px 0 10px 30px;
+        flex: 1;
+        padding: 15px 10px 10px 30px;
       }
       .image {
+        flex: 2;
         width: 100%;
         height: 60%;
         border-radius: 5px 5px 0 0;

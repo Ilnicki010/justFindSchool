@@ -6,6 +6,8 @@
         <select v-model="sort" id="sort-select" class="sort-select">
           <option value="flow">Od najlepszego klimatu</option>
           <option value="teachers">Od najlepszych nauczycieli</option>
+          <option value="standard">Od najlepszego standardu nauczania</option>
+          <option value="commute">Od najlepszego dojazdu</option>
         </select>
       </div>
       <div>
@@ -30,7 +32,6 @@
 
 <script>
 import schoolItem from "@/components/schoolItem";
-import sortBy from "lodash.sortby";
 import axios from "axios";
 import _ from "lodash";
 export default {
@@ -61,7 +62,16 @@ export default {
             .every(v => item.name.toLowerCase().includes(v));
         });
       }
-      return _.orderBy(this.allSchools, `ratesAvg.${this.sort}`, "desc");
+      function checkNested(obj, level, ...rest) {
+        if (obj === undefined) return false;
+        if (rest.length == 0 && obj.hasOwnProperty(level)) return true;
+        return checkNested(obj[level], ...rest);
+      }
+      return (this.allSchools = _.orderBy(
+        this.allSchools,
+        [school => _.get(school, `ratesAvg.${this.sort}`, "")],
+        ["desc"]
+      ));
     }
   },
   watch: {
@@ -108,7 +118,7 @@ export default {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
-      justify-content: center;
+      justify-content: flex-start;
     }
     .sort-wrapper {
       padding: 20px;

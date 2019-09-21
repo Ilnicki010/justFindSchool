@@ -22,7 +22,7 @@ export default {};
 
 <style lang="scss" scoped>
 .faqWrapper {
-  margin-top: 10vh;
+  margin-top: 5vh;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -40,7 +40,7 @@ export default {};
 }
 @media (min-width: 720px) {
   .faqWrapper {
-    padding: 70px;
+    padding: 0 70px;
   }
 }
 </style>
