@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import moment from "moment";
 import rateKnobs from "@/components/rateKnobs";
 export default {
   components: {
@@ -35,8 +36,7 @@ export default {
   },
   methods: {
     getFullDate(date) {
-      let newDate = new Date(date);
-      return `${newDate.getDay()}/${newDate.getMonth()}/${newDate.getFullYear()}`;
+      return moment(date).format("DD MM YYYY");
     },
     isClass(user_class) {
       if (user_class === "I" || user_class === "II" || user_class === "III") {

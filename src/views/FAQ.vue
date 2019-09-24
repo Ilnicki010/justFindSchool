@@ -5,10 +5,10 @@
       <ul>
         <li>
           <h2>Czy moja opinia będzie anonimowa?</h2>
-          <p>Tak. Twoja opinia będzie wpełni anonimowa, nigdzie nie podasz imienia ani nazwiska. Aplikacja nie ma także dostępu do lokalizacji Twojego urządzenia, ani nie wymaga logowania.</p>
+          <p>Tak. Twoja opinia będzie w pełni anonimowa, nigdzie nie podasz imienia ani nazwiska. Aplikacja nie ma także dostępu do lokalizacji Twojego urządzenia, ani nie wymaga logowania.</p>
         </li>
         <li>
-          <h2>Dlaczego mogę dodac tylko jedną opinie o jednej szkole?</h2>
+          <h2>Dlaczego mogę dodać tylko jedną opinie o jednej szkole?</h2>
           <p>Zaplanowaliśmy to tak w trosce o jakość i wiarygodność wystawianych opinii.</p>
         </li>
       </ul>
