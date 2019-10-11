@@ -45,8 +45,7 @@ export default {
         return false;
       }
     }
-  },
-  computed: {}
+  }
 };
 </script>
 

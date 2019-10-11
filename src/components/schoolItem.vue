@@ -6,14 +6,18 @@
         <div class="content">
           <h4>{{school.name}}</h4>
           <p>{{school.adress}} {{school.city}}</p>
+          <span v-if="school.rates.length > 0" class="rates-counter">{{school.rates.length}} Opinii</span>
+          <span v-else class="rates-counter">Dodaj pierwszą opinie!</span>
         </div>
       </div>
-      <rate-knobs
-        class="knobs"
-        v-if="school.ratesAvg"
-        :rateValues="school.ratesAvg"
-        :shorter="true"
-      />
+      <div class="knobsWrapper">
+        <rate-knobs
+          class="knobs"
+          v-if="school.ratesAvg"
+          :rateValues="school.ratesAvg"
+          :shorter="true"
+        />
+      </div>
     </div>
   </router-link>
 </template>
@@ -74,27 +78,43 @@ export default {
       border-radius: 5px 0 0 5px;
     }
     .content {
-      padding: 0 20px;
+      padding: 20px;
       flex: 2;
       display: flex;
       flex-direction: column;
-      height: 100%;
+      width: 100%;
       justify-content: space-around;
       h4,
       p {
         margin: 0;
       }
-
+      h4 {
+        flex: 3;
+      }
       p {
+        flex: 1;
         font-size: 0.9rem;
         opacity: 0.9;
       }
+      span {
+        flex: 1;
+      }
+      .rates-counter {
+        color: #16dea3;
+        border-left: 0.8px solid #16dea3;
+        text-align: left;
+        padding: 1px 6px;
+        font-weight: 100;
+        font-size: 0.8rem;
+      }
     }
   }
+
   .knobs {
-    margin: 30px;
+    margin: 23px 10px;
   }
 }
+
 @media (min-width: 720px) {
   .schoolItemWrapper {
     flex-direction: column;

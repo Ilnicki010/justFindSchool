@@ -10,7 +10,7 @@
         <span>{{school.adress}} | {{school.city}}</span>
       </div>
     </header>
-    <div v-if="loaded" class="content-wrapper">
+    <div class="content-wrapper">
       <button
         @click="openModal"
         class="btn btn--primary btn--rounded"
