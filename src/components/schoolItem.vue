@@ -1,6 +1,10 @@
 <template>
   <router-link :to="'/szkola/' + school.uid">
     <div v-if="loaded" class="schoolItemWrapper">
+      <div v-if="school.label" class="labels">
+        <span v-if="school.label == 'most-rated'" class="labels__fire">Najwięcej opinii</span>
+        <span v-if="school.label == 'longest-rates'" class="labels__longest">Najdłuższe opinie</span>
+      </div>
       <div class="main-part">
         <div class="image" v-lazy:background-image="school.images[0]"></div>
         <div class="content">
@@ -63,6 +67,21 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  position: relative;
+  .labels {
+    position: absolute;
+    top: -10px;
+    left: 5px;
+    .labels__fire,
+    .labels__longest {
+      background: #424851;
+      color: #fff;
+      padding: 5px 15px;
+      font-size: 13px;
+      border-radius: 50px;
+      margin-right: 10px;
+    }
+  }
   .main-part {
     display: flex;
     justify-content: space-around;

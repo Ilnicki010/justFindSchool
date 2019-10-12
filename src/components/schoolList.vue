@@ -49,7 +49,8 @@ export default {
     return {
       allSchools: [],
       sort: "teachers",
-      searchInput: ""
+      searchInput: "",
+      loading: true
     };
   },
   computed: {
@@ -77,6 +78,7 @@ export default {
   watch: {
     schoolList() {
       this.allSchools = this.schoolList;
+      this.loading = false;
     }
   },
   methods: {}

@@ -18,7 +18,7 @@
       >Dodaj anonimową opinię</button>
       <div class="content-wrapper__content">
         <rate-knobs class="rateAvg-knobs" v-if="school.ratesAvg" :rateValues="school.ratesAvg" />
-        <div class="all-rates">
+        <div class="all-rates" v-if="ratesLoaded">
           <h2>Opinie ({{ratesArr.length}})</h2>
           <transition name="slide">
             <rates-list v-if="ratesArr.length > 0" :ratesArr="ratesArr" />
@@ -27,6 +27,7 @@
             </div>
           </transition>
         </div>
+        <loader v-else />
       </div>
     </div>
     <transition name="slide-fast">
@@ -53,6 +54,7 @@ import axios from "axios";
 import rateKnobs from "@/components/rateKnobs";
 import addRateModal from "@/components/addRateModal";
 import ratesList from "@/components/ratesList";
+import loader from "@/components/loader";
 import messageComponent from "@/components/messageComponent";
 import { setTimeout } from "timers";
 require("clientjs");
@@ -69,7 +71,8 @@ export default {
     rateKnobs,
     addRateModal,
     ratesList,
-    messageComponent
+    messageComponent,
+    loader
   },
   props: {
     uid: {
@@ -93,7 +96,8 @@ export default {
           success: null
         },
         value: ""
-      }
+      },
+      ratesLoaded: false
     };
   },
   methods: {
@@ -112,6 +116,7 @@ export default {
         )
         .then(data => {
           this.ratesArr = data.data;
+          this.ratesLoaded = true;
         });
     },
     onScroll(e) {
