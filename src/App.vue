@@ -7,6 +7,17 @@
   </div>
 </template>
 <script>
+import WebFont from "webfontloader";
+
+export default {
+  created() {
+    WebFont.load({
+      google: {
+        families: ["Sacramento", "Nunito"]
+      }
+    });
+  }
+};
 </script>
 <style lang="scss">
 #app {

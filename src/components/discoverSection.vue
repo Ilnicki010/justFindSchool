@@ -1,5 +1,5 @@
 <template>
-  <div class="featured-articles" v-if="ready">
+  <div v-if="ready" class="featured-articles">
     <h3>Odkrywaj</h3>
     <div class="articles-list">
       <article class="featured">
@@ -28,11 +28,7 @@
 </template>
 
 <script>
-import workIcon from "@/components/workIcon";
 export default {
-  components: {
-    workIcon
-  },
   data() {
     return {
       ready: false

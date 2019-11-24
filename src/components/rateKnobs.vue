@@ -53,6 +53,7 @@
 
 <script>
 import knobControl from "vue-knob-control";
+
 export default {
   components: {
     knobControl

@@ -2,102 +2,102 @@
   <div class="modalWrapper">
     <header class="modal-header">
       <h2>Oceń szkołę</h2>
-      <span>Krok {{step}}/2 (całośc zajmie Ci około 15sek)</span>
+      <span>Krok {{ step }}/2 (całośc zajmie Ci około 15sek)</span>
     </header>
     <div class="steps-wrapper"></div>
     <transition name="slide-left">
-      <div v-if="step===1" class="step-one">
+      <div v-if="step === 1" class="step-one">
         <div class="inputs">
           <div class="inputs__input">
             <label for="addTeachersRate">Nauczyciele</label>
             <div class="input__slider">
               <input
+                id="addTeachersRate"
                 v-model="rateValues.teachers"
                 class="slider__input"
                 type="range"
-                id="addTeachersRate"
                 name="addTeachersRate"
                 min="1"
                 max="6"
                 step="1"
                 value="3"
               />
-              <span id="teachersValue">{{rateValues.teachers}} / 6</span>
+              <span id="teachersValue">{{ rateValues.teachers }} / 6</span>
             </div>
           </div>
           <div class="inputs__input">
             <label for="addTeachersRate">Klimat</label>
             <div class="input__slider">
               <input
+                id="addTeachersRate"
                 v-model="rateValues.flow"
                 class="slider__input"
                 type="range"
-                id="addTeachersRate"
                 name="addTeachersRate"
                 min="1"
                 max="6"
                 step="1"
                 value="3"
               />
-              <span>{{rateValues.flow}} / 6</span>
+              <span>{{ rateValues.flow }} / 6</span>
             </div>
           </div>
           <div class="inputs__input">
             <label for="addTeachersRate">Standard nauczania</label>
             <div class="input__slider">
               <input
+                id="addTeachersRate"
                 v-model="rateValues.standard"
                 class="slider__input"
                 type="range"
-                id="addTeachersRate"
                 name="addTeachersRate"
                 min="1"
                 max="6"
                 step="1"
                 value="3"
               />
-              <span>{{rateValues.standard}} / 6</span>
+              <span>{{ rateValues.standard }} / 6</span>
             </div>
           </div>
           <div class="inputs__input">
             <label for="addTeachersRate">Dojazd</label>
             <div class="input__slider">
               <input
+                id="addTeachersRate"
                 v-model="rateValues.commute"
                 class="slider__input"
                 type="range"
-                id="addTeachersRate"
                 name="addTeachersRate"
                 min="1"
                 max="6"
                 step="1"
                 value="3"
               />
-              <span>{{rateValues.commute}} / 6</span>
+              <span>{{ rateValues.commute }} / 6</span>
             </div>
           </div>
         </div>
         <div class="buttons">
-          <button @click="closeModal" class="btn btn--ghost-red">Anuluj</button>
-          <button @click="nextStep(2)" class="btn btn--primary">Krok 2</button>
+          <button class="btn btn--ghost-red" @click="closeModal">Anuluj</button>
+          <button class="btn btn--primary" @click="nextStep(2)">Krok 2</button>
         </div>
       </div>
     </transition>
     <transition name="slide-right">
-      <div v-if="step===2" class="step-two">
+      <div v-if="step === 2" class="step-two">
         <div>
           <label for="opinionContent">Opisz co uwazasz o tej swojej szkole</label>
           <textarea
+            id="opinionContent"
             v-model="rateValues.content"
             class="textarea-content"
             name="opinion-content"
-            id="opinionContent"
             placeholder="Opisz co uwazasz o tej swojej szkole."
           ></textarea>
         </div>
         <div class="class-select">
           <label for="class-select" class="class-select__label">W której jesteś klasie?</label>
-          <select v-model="rateValues.class" id="class-select" class="class-select__input">
+          <select id="class-select" v-model="rateValues.class" class="class-select__input">
             <option value selected disabled hidden>Wybierz</option>
             <option value="I">I LO</option>
             <option value="II">II LO</option>
@@ -110,17 +110,17 @@
         <div class="buttons-captacha-wrapper">
           <vue-recaptcha
             :load-recaptcha-script="true"
-            @verify="markRecaptchaAsVerified"
             :sitekey="recaptcha_key"
             class="recaptcha"
+            @verify="markRecaptchaAsVerified"
           ></vue-recaptcha>
           <div class="buttons">
-            <button @click="nextStep(1)" class="btn btn--ghost-red">Krok 1</button>
-            <button @click="addRate" class="btn btn--primary">Dodaj!</button>
+            <button class="btn btn--ghost-red" @click="nextStep(1)">Krok 1</button>
+            <button class="btn btn--primary" @click="addRate">Dodaj!</button>
           </div>
           <div v-if="errors.length > 0" class="error-message">
-            <ul v-for="(error,index) in errors" :key="`message-${index}`">
-              <li>{{error}}</li>
+            <ul v-for="(error, index) in errors" :key="`message-${index}`">
+              <li>{{ error }}</li>
             </ul>
           </div>
         </div>
@@ -128,28 +128,35 @@
     </transition>
     <message-component
       v-if="message.value"
-      :messageType="message.type"
-      :messageValue="message.value"
+      :message-type="message.type"
+      :message-value="message.value"
     />
   </div>
 </template>
 
 <script>
 import VueRecaptcha from "vue-recaptcha";
-import messageComponent from "@/components/messageComponent";
 import { setTimeout } from "timers";
 import axios from "axios";
-require("clientjs");
-const authorizationBasic = window.btoa(
-  "admin" + ":" + process.env.VUE_APP_API_KEY
-);
+import messageComponent from "@/components/messageComponent.vue";
+
+const ClientJS = require("clientjs");
+
+const authorizationBasic = window.btoa(`${"admin" + ":"}${process.env.VUE_APP_API_KEY}`);
 const config = {
-  headers: { Authorization: "Basic " + authorizationBasic }
+  headers: { Authorization: `Basic ${authorizationBasic}` }
 };
 export default {
   components: {
     VueRecaptcha,
     messageComponent
+  },
+  props: {
+    school: {
+      type: Object,
+      require: true,
+      default: null
+    }
   },
   data() {
     return {
@@ -177,12 +184,16 @@ export default {
       recaptcha_key: process.env.VUE_APP_RECAPTCHA
     };
   },
-  props: {
-    school: {
-      type: Object,
-      require: true,
-      default: {}
+  computed: {
+    teachers() {
+      return this.rateValues.teachers;
     }
+  },
+  mounted() {
+    const client = new ClientJS();
+    setTimeout(() => {
+      this.userPrint = client.getFingerprint();
+    }, 500);
   },
   methods: {
     checkForm() {
@@ -192,19 +203,18 @@ export default {
         this.recaptcha.recaptchaVerified
       ) {
         return true;
-      } else {
-        this.errors = [];
-        if (this.rateValues.content.length < 5) {
-          this.errors.push("Treść musi mieć min. 5 znaków");
-        }
-        if (!this.rateValues.class) {
-          this.errors.push("Musisz podać klasę do której chodzisz");
-        }
-        if (!this.recaptcha.recaptchaVerified) {
-          this.errors.push("Zaznacz najpierw recaptcha");
-        }
-        return false;
       }
+      this.errors = [];
+      if (this.rateValues.content.length < 5) {
+        this.errors.push("Treść musi mieć min. 5 znaków");
+      }
+      if (!this.rateValues.class) {
+        this.errors.push("Musisz podać klasę do której chodzisz");
+      }
+      if (!this.recaptcha.recaptchaVerified) {
+        this.errors.push("Zaznacz najpierw recaptcha");
+      }
+      return false;
     },
     closeModal() {
       this.$emit("closeModal", true);
@@ -212,17 +222,14 @@ export default {
     nextStep(step) {
       this.step = step;
     },
-    markRecaptchaAsVerified(response) {
+    markRecaptchaAsVerified() {
       this.errorMessage = "";
       this.recaptcha.recaptchaVerified = true;
     },
     addRate() {
       if (this.checkForm()) {
         axios
-          .get(
-            `${process.env.VUE_APP_API_URL}/rates/userprint/${this.userPrint}`,
-            config
-          )
+          .get(`${process.env.VUE_APP_API_URL}/rates/userprint/${this.userPrint}`, config)
           .then(data => {
             if (data.data.length === 0) {
               axios
@@ -261,17 +268,6 @@ export default {
           });
       }
     }
-  },
-  computed: {
-    teachers() {
-      return this.rateValues.teachers;
-    }
-  },
-  mounted() {
-    let client = new ClientJS();
-    setTimeout(() => {
-      this.userPrint = client.getFingerprint();
-    }, 500);
   }
 };
 </script>

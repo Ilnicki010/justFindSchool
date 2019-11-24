@@ -3,22 +3,26 @@
     <div v-if="loaded" class="schoolItemWrapper">
       <div v-if="school.label" class="labels">
         <span v-if="school.label == 'most-rated'" class="labels__fire">Najwięcej opinii</span>
-        <span v-if="school.label == 'longest-rates'" class="labels__longest">Najdłuższe opinie</span>
+        <span v-if="school.label == 'longest-rates'" class="labels__longest"
+          >Najdłuższe opinie</span
+        >
       </div>
       <div class="main-part">
-        <div class="image" v-lazy:background-image="school.images[0]"></div>
+        <div v-lazy:background-image="school.images[0]" class="image"></div>
         <div class="content">
-          <h4>{{school.name}}</h4>
-          <p>{{school.adress}} {{school.city}}</p>
-          <span v-if="school.rates.length > 0" class="rates-counter">{{school.rates.length}} Opinii</span>
+          <h4>{{ school.name }}</h4>
+          <p>{{ school.adress }} {{ school.city }}</p>
+          <span v-if="school.rates.length > 0" class="rates-counter"
+            >{{ school.rates.length }} Opinii</span
+          >
           <span v-else class="rates-counter">Dodaj pierwszą opinie!</span>
         </div>
       </div>
       <div class="knobsWrapper">
         <rate-knobs
-          class="knobs"
           v-if="school.ratesAvg"
-          :rateValues="school.ratesAvg"
+          class="knobs"
+          :rate-values="school.ratesAvg"
           :shorter="true"
         />
       </div>
@@ -28,12 +32,15 @@
 
 <script>
 import rateKnobs from "@/components/rateKnobs";
-import { setTimeout } from "timers";
+
 export default {
+  components: {
+    rateKnobs
+  },
   props: {
     school: {
       require: true,
-      default: {},
+      default: null,
       type: Object
     }
   },
@@ -42,13 +49,8 @@ export default {
       loaded: false
     };
   },
-  components: {
-    rateKnobs
-  },
   mounted() {
-    setTimeout(() => {
-      this.loaded = true;
-    }, 0);
+    this.loaded = true;
   }
 };
 </script>

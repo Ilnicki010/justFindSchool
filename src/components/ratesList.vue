@@ -1,18 +1,17 @@
 <template>
   <div class="ratesWrapper">
-    <div class="rate" v-for="rate in ratesArr" :key="rate._id">
-      <rate-knobs class="knobsWrapper" :rateValues="rate" />
+    <div v-for="rate in ratesArr" :key="rate._id" class="rate">
+      <rate-knobs class="knobsWrapper" :rate-values="rate" />
       <p class="rate__content">
-        <span>{{rate.content}}</span>
+        <span>{{ rate.content }}</span>
       </p>
       <div class="rate__info">
-        <span class="info__date">Dodano: {{getFullDate(rate.created_at)}}</span>
+        <span class="info__date">Dodano: {{ getFullDate(rate.created_at) }}</span>
         <div v-if="rate.user_class !== 'none'">
-          <span
-            v-if="isClass(rate.user_class)"
-            class="info__class"
-          >Uczeń klasy {{(rate.user_class)}}</span>
-          <span v-else class="info__class">{{(rate.user_class)}}</span>
+          <span v-if="isClass(rate.user_class)" class="info__class"
+            >Uczeń klasy {{ rate.user_class }}</span
+          >
+          <span v-else class="info__class">{{ rate.user_class }}</span>
         </div>
       </div>
 
@@ -24,6 +23,7 @@
 <script>
 import moment from "moment";
 import rateKnobs from "@/components/rateKnobs";
+
 export default {
   components: {
     rateKnobs
@@ -31,7 +31,8 @@ export default {
   props: {
     ratesArr: {
       type: Array,
-      required: true
+      required: true,
+      default: () => []
     }
   },
   methods: {
@@ -41,7 +42,8 @@ export default {
     isClass(user_class) {
       if (user_class === "I" || user_class === "II" || user_class === "III") {
         return true;
-      } else if (user_class === "Rodzic" || user_class === "Absolwent") {
+      }
+      if (user_class === "Rodzic" || user_class === "Absolwent") {
         return false;
       }
     }

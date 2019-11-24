@@ -18,10 +18,10 @@
               <div>
                 <label for="city-select" class="search-section__label">MIASTO</label>
                 <select
-                  @change="getSchoolList"
-                  v-model="city"
                   id="city-select"
+                  v-model="city"
                   class="search-section__input"
+                  @change="getSchoolList"
                 >
                   <option value="Gdynia">Gdynia</option>
                   <option value="Sopot">Sopot</option>
@@ -36,13 +36,13 @@
     <main>
       <section class="search-results">
         <transition name="slide-up" mode="out-in">
-          <h2 v-if="city" :city="city" class="city-name" :key="city">{{city}}</h2>
+          <h2 v-if="city" :key="city" :city="city" class="city-name">{{ city }}</h2>
         </transition>
         <discover-section />
         <transition name="slide">
-          <div class="all-schools" v-if="allSchools" :key="keyToRender">
-            <h3>Wszystkie szkoły ({{allSchools.length}})</h3>
-            <school-list :schoolList="allSchools" />
+          <div v-if="allSchools" :key="keyToRender" class="all-schools">
+            <h3>Wszystkie szkoły ({{ allSchools.length }})</h3>
+            <school-list :school-list="allSchools" />
           </div>
         </transition>
       </section>
@@ -55,11 +55,19 @@ import axios from "axios";
 import schoolList from "@/components/schoolList";
 import discoverSection from "@/components/discoverSection";
 import cookiesInfo from "@/components/cookiesInfo";
+
 export default {
   components: {
     schoolList,
     discoverSection,
     cookiesInfo
+  },
+  props: {
+    cityName: {
+      type: String,
+      default: "Gdynia",
+      required: false
+    }
   },
   data() {
     return {
@@ -70,13 +78,6 @@ export default {
       loaded: false
     };
   },
-  props: {
-    cityName: {
-      type: String,
-      default: "Gdynia",
-      required: false
-    }
-  },
   mounted() {
     this.loaded = true;
     this.city = this.cityName;
@@ -84,18 +85,14 @@ export default {
   },
   methods: {
     getSchoolList() {
-      const authorizationBasic = window.btoa(
-        "admin" + ":" + process.env.VUE_APP_API_KEY
-      );
+      const authorizationBasic = window.btoa(`${"admin" + ":"}${process.env.VUE_APP_API_KEY}`);
       const config = {
-        headers: { Authorization: "Basic " + authorizationBasic }
+        headers: { Authorization: `Basic ${authorizationBasic}` }
       };
       this.keyToRender += 1;
-      axios
-        .get(`${process.env.VUE_APP_API_URL}/schools?city=${this.city}`, config)
-        .then(data => {
-          this.allSchools = data.data;
-        });
+      axios.get(`${process.env.VUE_APP_API_URL}/schools?city=${this.city}`, config).then(data => {
+        this.allSchools = data.data;
+      });
     }
   }
 };

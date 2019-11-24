@@ -1,9 +1,9 @@
 <template>
-  <div class="schoollistWrapper" v-if="allSchools">
+  <div v-if="allSchools" class="schoollistWrapper">
     <div class="sort-wrapper">
       <div>
         <label for="sort-select" class="sort-label">Sortuj</label>
-        <select v-model="sort" id="sort-select" class="sort-select">
+        <select id="sort-select" v-model="sort" class="sort-select">
           <option value="flow">Od najlepszego klimatu</option>
           <option value="teachers">Od najlepszych nauczycieli</option>
           <option value="standard">Od najlepszego standardu nauczania</option>
@@ -13,11 +13,11 @@
       <div>
         <label for="school-search" class="search-section__label">Wyszukaj</label>
         <input
+          id="school-search"
           v-model="searchInput"
           class="sort-select"
           type="text"
           name="school-search"
-          id="school-search"
           placeholder="np. IX LO"
         />
       </div>
@@ -31,9 +31,9 @@
 </template>
 
 <script>
-import schoolItem from "@/components/schoolItem";
-import axios from "axios";
 import _ from "lodash";
+import schoolItem from "@/components/schoolItem";
+
 export default {
   components: {
     schoolItem
@@ -41,7 +41,7 @@ export default {
   props: {
     schoolList: {
       require: true,
-      default: [],
+      default: () => [],
       type: Array
     }
   },
@@ -56,17 +56,12 @@ export default {
   computed: {
     orderedSchools() {
       if (this.searchInput.length >= 2) {
-        return this.allSchools.filter(item => {
-          return this.searchInput
+        return this.allSchools.filter(item =>
+          this.searchInput
             .toLowerCase()
             .split(" ")
-            .every(v => item.name.toLowerCase().includes(v));
-        });
-      }
-      function checkNested(obj, level, ...rest) {
-        if (obj === undefined) return false;
-        if (rest.length == 0 && obj.hasOwnProperty(level)) return true;
-        return checkNested(obj[level], ...rest);
+            .every(v => item.name.toLowerCase().includes(v))
+        );
       }
       return (this.allSchools = _.orderBy(
         this.allSchools,
@@ -80,8 +75,7 @@ export default {
       this.allSchools = this.schoolList;
       this.loading = false;
     }
-  },
-  methods: {}
+  }
 };
 </script>
 

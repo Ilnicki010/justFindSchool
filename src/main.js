@@ -1,19 +1,18 @@
-import Vue from 'vue';
-import VueAnalytics from 'vue-analytics';
-import VueLazyload from 'vue-lazyload';
-import App from './App.vue';
-import router from './router';
-
+import Vue from "vue";
+import VueAnalytics from "vue-analytics";
+import VueLazyload from "vue-lazyload";
+import App from "./App.vue";
+import router from "./router";
 
 Vue.use(VueLazyload);
 Vue.use(VueAnalytics, {
-  id: 'UA-147954275-1',
-  router,
+  id: "UA-147954275-1",
+  router
 });
 
 Vue.config.productionTip = false;
 
 new Vue({
   router,
-  render: h => h(App),
-}).$mount('#app');
+  render: h => h(App)
+}).$mount("#app");

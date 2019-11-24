@@ -1,20 +1,14 @@
 <template>
   <div
     class="messageWrapper"
-    :class="{'message--error':messageType.error,'message--success':messageType.success}"
+    :class="{ 'message--error': messageType.error, 'message--success': messageType.success }"
   >
-    <span>{{this.messageValue}}</span>
+    <span>{{ messageValue }}</span>
   </div>
 </template>
 
 <script>
-import { setTimeout } from "timers";
 export default {
-  data() {
-    return {
-      loaded: false
-    };
-  },
   props: {
     messageType: {
       error: {
@@ -30,6 +24,11 @@ export default {
       type: String,
       default: ""
     }
+  },
+  data() {
+    return {
+      loaded: false
+    };
   },
   beforeDestroy() {
     this.show = false;

@@ -1,9 +1,9 @@
 <template>
   <transition name="slide">
-    <aside v-if="show" class="cookiesWrapper">
+    <div v-if="show" class="cookies-wrapper">
       <span>Ta strona wykorzystuje pliki cookies do poprawnego funkcjonowania.</span>
-      <button @click="closeInfo" class="btn btn--primary">Cool</button>
-    </aside>
+      <button class="btn btn--primary" @click="() => (this.show = false)">Cool</button>
+    </div>
   </transition>
 </template>
 
@@ -13,30 +13,22 @@ export default {
     return {
       show: true
     };
-  },
-  methods: {
-    closeInfo() {
-      this.show = false;
-    }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.cookiesWrapper {
+.cookies-wrapper {
   position: fixed;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.9rem;
+  font-size: $small;
   width: 100%;
   z-index: 99999;
   bottom: 0;
-  background: #424851;
-  color: #fff;
+  background: $deep-dark;
+  color: $white;
   padding: 20px;
-  span {
-    padding-right: 15px;
-  }
 }
 </style>
