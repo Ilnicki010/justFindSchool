@@ -20,7 +20,7 @@
               data-name="Ellipse 1"
               transform="translate(204 126)"
               fill="none"
-              stroke="#16dea3"
+              stroke="$primary"
               stroke-width="3"
             >
               <circle cx="68.5" cy="68.5" r="68.5" stroke="none" />
@@ -30,7 +30,7 @@
               id="_4-2"
               data-name="4"
               transform="translate(256 213)"
-              fill="#16dea3"
+              fill="$primary"
               font-size="55"
               font-family="Nunito-Light, Nunito"
               font-weight="300"
@@ -44,7 +44,7 @@
               data-name="Ellipse 2"
               transform="translate(415 126)"
               fill="none"
-              stroke="#16dea3"
+              stroke="$primary"
               stroke-width="3"
             >
               <circle cx="68.5" cy="68.5" r="68.5" stroke="none" />
@@ -54,7 +54,7 @@
               id="_5"
               data-name="5"
               transform="translate(467 213)"
-              fill="#16dea3"
+              fill="$primary"
               font-size="55"
               font-family="Nunito-Light, Nunito"
               font-weight="300"
@@ -68,7 +68,7 @@
               data-name="Ellipse 3"
               transform="translate(626 126)"
               fill="none"
-              stroke="#16dea3"
+              stroke="$primary"
               stroke-width="3"
             >
               <circle cx="68.5" cy="68.5" r="68.5" stroke="none" />
@@ -78,7 +78,7 @@
               id="_5-2"
               data-name="5"
               transform="translate(678 213)"
-              fill="#16dea3"
+              fill="$primary"
               font-size="55"
               font-family="Nunito-Light, Nunito"
               font-weight="300"
@@ -92,7 +92,7 @@
               data-name="Ellipse 4"
               transform="translate(837 126)"
               fill="none"
-              stroke="#16dea3"
+              stroke="$primary"
               stroke-width="3"
             >
               <circle cx="68.5" cy="68.5" r="68.5" stroke="none" />
@@ -102,7 +102,7 @@
               id="_3-2"
               data-name="3"
               transform="translate(889 213)"
-              fill="#16dea3"
+              fill="$primary"
               font-size="55"
               font-family="Nunito-Light, Nunito"
               font-weight="300"

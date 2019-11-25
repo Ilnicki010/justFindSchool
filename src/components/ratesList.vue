@@ -8,14 +8,14 @@
       <div class="rate__info">
         <span class="info__date">Dodano: {{ getFullDate(rate.created_at) }}</span>
         <div v-if="rate.user_class !== 'none'">
-          <span v-if="isClass(rate.user_class)" class="info__class"
-            >Uczeń klasy {{ rate.user_class }}</span
-          >
+          <span
+            v-if="isClass(rate.user_class)"
+            class="info__class"
+          >Uczeń klasy {{ rate.user_class }}</span>
           <span v-else class="info__class">{{ rate.user_class }}</span>
         </div>
       </div>
-
-      <img class="pattern" src="../assets/pattern.svg" alt="pattern" />
+      <img class="pattern" src="@/assets/pattern.svg" alt="pattern" />
     </div>
   </div>
 </template>
@@ -59,14 +59,14 @@ export default {
   border-radius: 10px;
   .rate {
     padding: 20px;
-    box-shadow: 0 5px 10px rgba(#000, 0.2);
+    box-shadow: 0 5px 10px rgba($black, 0.2);
     margin-bottom: 30px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    background: #fff;
+    background: $white;
     .pattern {
       display: none;
     }
@@ -82,8 +82,8 @@ export default {
       }
 
       .info__class {
-        border-bottom: #16dea3 1px solid;
-        color: #16dea3;
+        border-bottom: $primary 1px solid;
+        color: $primary;
       }
     }
     .rate__content {
@@ -98,7 +98,7 @@ export default {
     flex-wrap: wrap;
     position: relative;
     z-index: 999;
-    background: linear-gradient(to right, #16dea3, #0d8561);
+    background: linear-gradient(to right, $primary, $primary-dark);
     .rate {
       margin: 20px;
       width: 100%;
@@ -123,9 +123,9 @@ export default {
         text-align: center;
         align-items: center;
         .info__class {
-          border: #16dea3 1px solid;
+          border: $primary 1px solid;
           border-radius: 3px;
-          color: #16dea3;
+          color: $primary;
         }
         .info__date {
           white-space: nowrap;
@@ -135,7 +135,7 @@ export default {
         flex: 4;
         margin: 0 20px;
         padding: 0 10px;
-        border-left: 1px solid #16dea3;
+        border-left: 1px solid $primary;
       }
     }
   }

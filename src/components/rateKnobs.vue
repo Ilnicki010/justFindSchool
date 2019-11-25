@@ -7,7 +7,7 @@
         :min="1"
         :max="6"
         :stroke-width="2"
-        :primary-color="'#16dea3'"
+        :primary-color="'#15DEA3'"
         :responsive="true"
       ></knob-control>
       <label for="flow">Klimat</label>
@@ -19,7 +19,7 @@
         :min="1"
         :max="6"
         :stroke-width="2"
-        :primary-color="'#16dea3'"
+        :primary-color="'#15DEA3'"
         :responsive="true"
       ></knob-control>
       <label for="standard">Standard</label>
@@ -31,7 +31,7 @@
         :min="1"
         :max="6"
         :stroke-width="2"
-        :primary-color="'#16dea3'"
+        :primary-color="'#15DEA3'"
         :responsive="true"
       ></knob-control>
       <label for="commute">Nauczyciele</label>
@@ -43,7 +43,7 @@
         :min="1"
         :max="6"
         :stroke-width="2"
-        :primary-color="'#16dea3'"
+        :primary-color="'#15DEA3'"
         :responsive="true"
       ></knob-control>
       <label for="commute">Dojazd</label>

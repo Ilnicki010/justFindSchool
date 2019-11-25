@@ -44,7 +44,7 @@ export default {
     justify-content: flex-start;
     align-content: center;
     p {
-      color: #16dea3;
+      color: $primary;
     }
   }
   .articles-list {
@@ -63,7 +63,7 @@ export default {
       justify-content: space-around;
       align-items: flex-start;
       border-radius: 5px;
-      box-shadow: 0 4px 8px rgba(#000, 0.2);
+      box-shadow: 0 4px 8px rgba($black, 0.2);
     }
   }
 }

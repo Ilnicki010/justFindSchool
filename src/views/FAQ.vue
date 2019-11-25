@@ -1,7 +1,7 @@
 <template>
   <div class="faqWrapper">
     <h1>Najczęściej zadawane pytania</h1>
-    <div>
+    <main>
       <ul>
         <li>
           <h2>Czy moja opinia będzie anonimowa?</h2>
@@ -16,7 +16,7 @@
           <p>Zaplanowaliśmy to tak w trosce o jakość i wiarygodność wystawianych opinii.</p>
         </li>
       </ul>
-    </div>
+    </main>
   </div>
 </template>
 
@@ -35,10 +35,10 @@ export default {};
     padding: 0;
   }
   h2 {
-    color: #16dea3;
+    color: $primary;
   }
   p {
-    border-left: 1px solid #16dea3;
+    border-left: 1px solid $primary;
     padding: 0 15px;
   }
 }

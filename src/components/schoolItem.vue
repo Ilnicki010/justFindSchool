@@ -1,31 +1,25 @@
 <template>
-  <router-link :to="'/szkola/' + school.uid">
-    <div v-if="loaded" class="schoolItemWrapper">
-      <div v-if="school.label" class="labels">
-        <span v-if="school.label == 'most-rated'" class="labels__fire">Najwięcej opinii</span>
-        <span v-if="school.label == 'longest-rates'" class="labels__longest"
-          >Najdłuższe opinie</span
-        >
+  <router-link :to="'/szkola/' + school.uid" class="schoolItemWrapper">
+    <div v-if="school.label" class="labels">
+      <span v-if="school.label === 'most-rated'" class="labels__fire">Najwięcej opinii</span>
+      <span v-if="school.label === 'longest-rates'" class="labels__longest">Najdłuższe opinie</span>
+    </div>
+    <div class="main-part">
+      <div v-lazy:background-image="school.images[0]" class="image"></div>
+      <div class="content">
+        <h4>{{ school.name }}</h4>
+        <p>{{ school.adress }} {{ school.city }}</p>
+        <span v-if="school.rates.length > 0" class="rates-counter">{{ school.rates.length }} Opinii</span>
+        <span v-else class="rates-counter">Dodaj pierwszą opinie!</span>
       </div>
-      <div class="main-part">
-        <div v-lazy:background-image="school.images[0]" class="image"></div>
-        <div class="content">
-          <h4>{{ school.name }}</h4>
-          <p>{{ school.adress }} {{ school.city }}</p>
-          <span v-if="school.rates.length > 0" class="rates-counter"
-            >{{ school.rates.length }} Opinii</span
-          >
-          <span v-else class="rates-counter">Dodaj pierwszą opinie!</span>
-        </div>
-      </div>
-      <div class="knobsWrapper">
-        <rate-knobs
-          v-if="school.ratesAvg"
-          class="knobs"
-          :rate-values="school.ratesAvg"
-          :shorter="true"
-        />
-      </div>
+    </div>
+    <div class="knobsWrapper">
+      <rate-knobs
+        v-if="school.ratesAvg"
+        class="knobs"
+        :rate-values="school.ratesAvg"
+        :shorter="true"
+      />
     </div>
   </router-link>
 </template>
@@ -57,12 +51,12 @@ export default {
 
 <style lang="scss" scoped>
 .preloader {
-  box-shadow: 0 3px 3px rgba(#000, 0.2);
+  box-shadow: 0 3px 3px rgba($black, 0.2);
   border-radius: 5px;
   margin-bottom: 4vh;
 }
 .schoolItemWrapper {
-  box-shadow: 0 3px 3px rgba(#000, 0.2);
+  box-shadow: 0 3px 3px rgba($black, 0.2);
   border-radius: 5px;
   margin-bottom: 4vh;
   height: auto;
@@ -77,7 +71,7 @@ export default {
     .labels__fire,
     .labels__longest {
       background: #424851;
-      color: #fff;
+      color: $white;
       padding: 5px 15px;
       font-size: 13px;
       border-radius: 50px;
@@ -121,8 +115,8 @@ export default {
         flex: 1;
       }
       .rates-counter {
-        color: #16dea3;
-        border-left: 0.8px solid #16dea3;
+        color: $primary;
+        border-left: 0.8px solid $primary;
         text-align: left;
         padding: 1px 6px;
         font-weight: 100;
@@ -140,11 +134,10 @@ export default {
   .schoolItemWrapper {
     flex-direction: column;
     margin: 20px;
-    width: 25vw;
     transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
     &:hover {
       transform: scale(1.02);
-      box-shadow: 0 3px 20px rgba(#000, 0.2);
+      box-shadow: 0 3px 20px rgba($black, 0.2);
     }
     .main-part {
       height: 200px;

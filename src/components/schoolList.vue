@@ -23,9 +23,7 @@
       </div>
     </div>
     <section class="school-list">
-      <article v-for="school in orderedSchools" :key="school._id">
-        <school-item v-if="school" :school="school" />
-      </article>
+      <school-item v-for="school in orderedSchools" :school="school" :key="school._id" />
     </section>
   </div>
 </template>
@@ -98,8 +96,8 @@ export default {
     }
     .sort-select {
       flex: 3;
-      background: #16dea3;
-      color: #fff;
+      background: $primary;
+      color: $white;
       padding: 9px 9px 9px 13px;
       border-radius: 3px;
       outline: none;
@@ -111,10 +109,8 @@ export default {
   .schoollistWrapper {
     .school-list {
       margin-top: 5vh;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: flex-start;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
     }
     .sort-wrapper {
       padding: 20px;

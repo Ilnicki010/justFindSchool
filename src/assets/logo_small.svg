@@ -12,10 +12,10 @@
             <text fill="#fff" font-family="Nunito" font-size="36" font-weight="600" transform="translate(124 115)">
                 <tspan x="0" y="0">Just</tspan><tspan x="0" y="40">Find</tspan><tspan x="0" y="80">School</tspan>
             </text>
-            <text fill="#16dea3" font-family="Nunito" font-size="34" transform="translate(251 139) rotate(-90)">
+            <text fill="#15DEA3" font-family="Nunito" font-size="34" transform="translate(251 139) rotate(-90)">
                 <tspan x="0" y="0">.com</tspan>
             </text>
-            <line y2="143" fill="none" stroke="#16dea3" stroke-linecap="round" stroke-width="3.5" transform="translate(102.5 71.5)"/>
+            <line y2="143" fill="none" stroke="#15DEA3" stroke-linecap="round" stroke-width="3.5" transform="translate(102.5 71.5)"/>
         </g>
     </g>
 </svg>

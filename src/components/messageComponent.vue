@@ -1,6 +1,6 @@
 <template>
   <div
-    class="messageWrapper"
+    class="message"
     :class="{ 'message--error': messageType.error, 'message--success': messageType.success }"
   >
     <span>{{ messageValue }}</span>
@@ -37,7 +37,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.messageWrapper {
+.message {
   position: absolute;
   bottom: 100px;
   left: 0;
@@ -45,7 +45,7 @@ export default {
   margin: auto;
   width: 80%;
   z-index: 9999;
-  color: #fff;
+  color: $white;
   border-radius: 6px;
   padding: 20px;
 }
@@ -54,7 +54,7 @@ export default {
   box-shadow: 0 10px 15px rgba(#f14848, 0.2);
 }
 .message--success {
-  background: #16dea3;
-  box-shadow: 0 10px 15px rgba(#16dea3, 0.2);
+  background: $primary;
+  box-shadow: 0 10px 15px rgba($primary, 0.2);
 }
 </style>

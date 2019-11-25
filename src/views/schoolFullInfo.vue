@@ -3,35 +3,33 @@
     <header
       id="header"
       class="fullinfo-header"
-      :style="{ backgroundImage: 'url(' + school.images[0] + ')' }"
+      :style="{ backgroundImage: `url(${school.images[0]})` }"
     >
       <h1>{{ school.name }}</h1>
       <div class="icons">
         <span>{{ school.adress }} | {{ school.city }}</span>
       </div>
     </header>
-    <div class="content-wrapper">
+    <main class="content-wrapper">
       <button
         class="btn btn--primary btn--rounded"
         :class="{ inactive: oldUser }"
         @click="openModal"
-      >
-        Dodaj anonimową opinię
-      </button>
+      >Dodaj anonimową opinię</button>
       <div class="content-wrapper__content">
         <rate-knobs v-if="school.ratesAvg" class="rateAvg-knobs" :rate-values="school.ratesAvg" />
-        <div v-if="ratesLoaded" class="all-rates">
+        <section v-if="ratesLoaded" class="all-rates">
           <h2>Opinie ({{ ratesArr.length }})</h2>
           <transition name="slide">
             <rates-list v-if="ratesArr.length > 0" :rates-arr="ratesArr" />
             <div v-else class="empty">
-              <img class="icon" src="../assets/no_data.svg" alt="empty icon" />
+              <img class="icon" src="@/assets/no_data.svg" alt="empty icon" />
             </div>
           </transition>
-        </div>
+        </section>
         <loader v-else />
       </div>
-    </div>
+    </main>
     <transition name="slide-fast">
       <add-rate-modal
         v-if="rateModal"
@@ -62,7 +60,9 @@ import messageComponent from "@/components/messageComponent";
 
 const ClientJS = require("clientjs");
 
-const authorizationBasic = window.btoa(`${"admin" + ":"}${process.env.VUE_APP_API_KEY}`);
+const authorizationBasic = window.btoa(
+  `${"admin" + ":"}${process.env.VUE_APP_API_KEY}`
+);
 const config = {
   headers: { Authorization: `Basic ${authorizationBasic}` }
 };
@@ -122,13 +122,18 @@ export default {
   },
   methods: {
     getSchool() {
-      axios.get(`${process.env.VUE_APP_API_URL}/schools?uid=${this.uid}`, config).then(data => {
-        this.school = data.data[0];
-      });
+      axios
+        .get(`${process.env.VUE_APP_API_URL}/schools?uid=${this.uid}`, config)
+        .then(data => {
+          this.school = data.data[0];
+        });
     },
     getRates() {
       axios
-        .get(`${process.env.VUE_APP_API_URL}/rates/school/${this.school._id}`, config)
+        .get(
+          `${process.env.VUE_APP_API_URL}/rates/school/${this.school._id}`,
+          config
+        )
         .then(data => {
           this.ratesArr = data.data;
           this.ratesLoaded = true;
@@ -141,7 +146,8 @@ export default {
       } else {
         this.showMessage = true;
         this.message.type.error = true;
-        this.message.value = "W trosce o wiarygodnośc mozesz wystawic tylko 1 opinię 1 szkole";
+        this.message.value =
+          "W trosce o wiarygodnośc mozesz wystawic tylko 1 opinię 1 szkole";
         setTimeout(() => {
           this.showMessage = false;
         }, 2500);
@@ -153,7 +159,10 @@ export default {
     },
     isUserNew() {
       axios
-        .get(`${process.env.VUE_APP_API_URL}/rates/userprint/${this.userPrint}`, config)
+        .get(
+          `${process.env.VUE_APP_API_URL}/rates/userprint/${this.userPrint}`,
+          config
+        )
         .then(data => {
           if (data.data.length === 0) {
             this.oldUser = false;
@@ -185,14 +194,14 @@ export default {
     position: fixed;
     top: 0;
     left: 0;
-    color: #fff;
+    color: $white;
     .icons {
       display: flex;
       justify-content: center;
       width: 100%;
       z-index: 999999;
       .icon {
-        color: #fff;
+        color: $white;
       }
     }
     h1,
@@ -207,7 +216,11 @@ export default {
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: linear-gradient(to top, rgba(#000, 0.6), rgba(#000, 0.2));
+      background-image: linear-gradient(
+        to top,
+        rgba($black, 0.6),
+        rgba($black, 0.2)
+      );
       z-index: 999;
     }
   }
@@ -215,9 +228,9 @@ export default {
     margin-top: 40vh;
     min-height: 100vh;
     z-index: 999;
-    background: #fff;
+    background: $white;
     padding: 20px;
-    box-shadow: 0 -5px 20px rgba(#000, 0.9);
+    box-shadow: 0 -5px 20px rgba($black, 0.9);
     .btn {
       position: absolute;
       top: calc(40vh - 20px);
@@ -228,12 +241,12 @@ export default {
       height: 40px;
       width: 230px;
       border: none;
-      background: linear-gradient(to left, #0d8561, #0d8561);
+      background: linear-gradient(to left, $primary-dark, $primary-dark);
       animation: shake 5s infinite linear;
       transition: 0.4s linear;
     }
     .inactive {
-      background: #000;
+      background: $black;
       animation: none;
       display: flex;
       justify-content: space-around;

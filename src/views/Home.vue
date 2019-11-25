@@ -1,7 +1,7 @@
 <template>
-  <div class="homeWrapper">
+  <div v-if="loaded" class="homeWrapper">
     <transition name="special-header">
-      <header v-if="loaded" class="main-header">
+      <header class="main-header">
         <nav class="main-header__nav">
           <div class="img-wrapper">
             <img src="@/assets/logo_small.svg" alt="logo" />
@@ -9,43 +9,38 @@
           <router-link to="/faq" class="btn btn--ghost-green faq-btn">FAQ</router-link>
         </nav>
         <transition name="fade">
-          <div v-if="loaded" class="main-header__content">
+          <div class="main-header__content">
             <h1>
               Zamień się rolami i
               <span>oceń swoją szkołę</span>
             </h1>
-            <section class="search-section">
-              <div>
-                <label for="city-select" class="search-section__label">MIASTO</label>
-                <select
-                  id="city-select"
-                  v-model="city"
-                  class="search-section__input"
-                  @change="getSchoolList"
-                >
-                  <option value="Gdynia">Gdynia</option>
-                  <option value="Sopot">Sopot</option>
-                  <option value="Gdańsk">Gdańsk</option>
-                </select>
-              </div>
-            </section>
+            <div class="search-section">
+              <label for="city-select" class="search-section__label">MIASTO</label>
+              <select
+                id="city-select"
+                v-model="city"
+                class="search-section__input"
+                @change="getSchoolList"
+              >
+                <option value="Gdynia">Gdynia</option>
+                <option value="Sopot">Sopot</option>
+                <option value="Gdańsk">Gdańsk</option>
+              </select>
+            </div>
           </div>
         </transition>
       </header>
     </transition>
-    <main>
-      <section class="search-results">
-        <transition name="slide-up" mode="out-in">
-          <h2 v-if="city" :key="city" :city="city" class="city-name">{{ city }}</h2>
-        </transition>
-        <discover-section />
-        <transition name="slide">
-          <div v-if="allSchools" :key="keyToRender" class="all-schools">
-            <h3>Wszystkie szkoły ({{ allSchools.length }})</h3>
-            <school-list :school-list="allSchools" />
-          </div>
-        </transition>
-      </section>
+    <main class="search-results">
+      <transition name="slide-up" mode="out-in">
+        <span v-if="city" :key="city" class="city-name">{{ city }}</span>
+      </transition>
+      <transition name="slide">
+        <div v-if="allSchools" :key="keyToRender" class="all-schools">
+          <h3>Wszystkie szkoły ({{ allSchools.length }})</h3>
+          <school-list :school-list="allSchools" />
+        </div>
+      </transition>
     </main>
     <cookies-info />
   </div>
@@ -53,13 +48,11 @@
 <script>
 import axios from "axios";
 import schoolList from "@/components/schoolList";
-import discoverSection from "@/components/discoverSection";
 import cookiesInfo from "@/components/cookiesInfo";
 
 export default {
   components: {
     schoolList,
-    discoverSection,
     cookiesInfo
   },
   props: {
@@ -85,14 +78,18 @@ export default {
   },
   methods: {
     getSchoolList() {
-      const authorizationBasic = window.btoa(`${"admin" + ":"}${process.env.VUE_APP_API_KEY}`);
+      const authorizationBasic = window.btoa(
+        `${"admin" + ":"}${process.env.VUE_APP_API_KEY}`
+      );
       const config = {
         headers: { Authorization: `Basic ${authorizationBasic}` }
       };
-      this.keyToRender += 1;
-      axios.get(`${process.env.VUE_APP_API_URL}/schools?city=${this.city}`, config).then(data => {
-        this.allSchools = data.data;
-      });
+      this.keyToRender++;
+      axios
+        .get(`${process.env.VUE_APP_API_URL}/schools?city=${this.city}`, config)
+        .then(data => {
+          this.allSchools = data.data;
+        });
     }
   }
 };
@@ -112,12 +109,12 @@ export default {
     flex-direction: column;
     width: 100%;
     height: 60vh;
-    color: #fff;
-    background: #000;
+    color: $white;
+    background: $black;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-image: linear-gradient(to top, rgba(#000, 0.9), rgba(#000, 0.8)),
+    background-image: linear-gradient(to top, rgba($black, 0.9), rgba($black, 0.8)),
       url("https://ik.imagekit.io/ugqakuw7ym/header_O2iECjTEH.jpg");
 
     .main-header__nav {
@@ -159,9 +156,9 @@ export default {
       .search-section {
         width: 100%;
         .search-section__input {
-          border: 1px solid #16dea3;
-          background: #16dea3;
-          color: #fff;
+          border: 1px solid $primary;
+          background: $primary;
+          color: $white;
           border-radius: 4.3px;
           padding: 15px 20px;
           width: 100%;
@@ -171,7 +168,7 @@ export default {
           transition: opacity 0.1s ease-out;
 
           &::placeholder {
-            color: #fff;
+            color: $white;
             opacity: 0.7;
           }
           &:focus {
@@ -182,49 +179,48 @@ export default {
       }
     }
   }
-  main {
+
+  .search-results {
     position: relative;
     width: 100vw;
     padding: 20px;
-    .search-results {
-      display: flex;
-      flex-direction: column;
-      .city-name {
-        font-size: 3rem;
-        margin: 50px auto 20px;
-        position: relative;
-        width: 100%;
-        text-align: center;
-        z-index: -999;
-        &::after {
-          content: "";
-          position: absolute;
-          top: -10px;
-          left: 0;
-          right: 0;
-          margin: auto;
-          height: 200px;
-          width: 3px;
-          background: #000;
-          transform: rotatex(180deg);
-          transform-origin: top;
-        }
-        &::before {
-          content: "";
-          position: absolute;
-          top: -10px;
-          left: 0;
-          right: 0;
-          margin: auto;
-          background: #000;
-          width: 12px;
-          height: 12px;
-          border-radius: 100px;
-        }
+    display: flex;
+    flex-direction: column;
+    .city-name {
+      font-size: 3rem;
+      margin: 50px auto 20px;
+      position: relative;
+      width: 100%;
+      text-align: center;
+      z-index: -999;
+      &::after {
+        content: "";
+        position: absolute;
+        top: -10px;
+        left: 0;
+        right: 0;
+        margin: auto;
+        height: 200px;
+        width: 3px;
+        background: $black;
+        transform: rotatex(180deg);
+        transform-origin: top;
       }
-      .all-schools {
-        margin-top: 5vh;
+      &::before {
+        content: "";
+        position: absolute;
+        top: -10px;
+        left: 0;
+        right: 0;
+        margin: auto;
+        background: $black;
+        width: 12px;
+        height: 12px;
+        border-radius: 100px;
       }
+    }
+    .all-schools {
+      margin-top: 5vh;
     }
   }
 }
@@ -234,7 +230,7 @@ export default {
       height: 80vh;
       padding: 100px;
       .main-header__content {
-        background: #fff;
+        background: $white;
         width: 50vw;
         margin: auto;
         padding: 40px;
@@ -248,7 +244,7 @@ export default {
         }
       }
     }
-    main {
+    .search-results {
       padding: 70px;
     }
   }

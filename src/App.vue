@@ -50,7 +50,7 @@ h3 {
   font-size: 1.4rem;
 }
 a {
-  color: #000;
+  color: $black;
   text-decoration: none;
 }
 label {
@@ -76,7 +76,7 @@ input[type="range"] {
 }
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  background: #16dea3;
+  background: $primary;
   height: 35px;
   width: 35px;
   border-radius: 99px;
@@ -89,18 +89,18 @@ input[type="range"]::-webkit-slider-runnable-track {
 }
 input::-webkit-input-placeholder {
   /* Chrome/Opera/Safari */
-  color: #fff;
+  color: $white;
 }
 input::-moz-placeholder {
   /* Firefox 19+ */
-  color: #fff;
+  color: $white;
 }
 input:-moz-placeholder {
   /* Firefox 18- */
-  color: #fff;
+  color: $white;
 }
 html {
-  -webkit-tap-highlight-color: rgba(#16dea3, 0.3);
+  -webkit-tap-highlight-color: rgba($primary, 0.3);
 }
 
 .btn {
@@ -118,9 +118,9 @@ html {
   cursor: pointer;
 }
 .btn--primary {
-  color: #fff;
-  background: #16dea3;
-  border: 1px solid #16dea3;
+  color: $white;
+  background: $primary;
+  border: 1px solid $primary;
 }
 .btn--ghost-red {
   background: none;
@@ -129,14 +129,14 @@ html {
 }
 .btn--ghost-green {
   background: none;
-  color: #16dea3;
-  border: 1px solid #16dea3;
+  color: $primary;
+  border: 1px solid $primary;
 }
 .btn--rounded {
   border-radius: 100px;
 }
 .text-green {
-  color: #16dea3;
+  color: $primary;
 }
 @keyframes scale {
   from {

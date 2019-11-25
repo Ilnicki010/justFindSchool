@@ -286,7 +286,7 @@ export default {
   height: 80vh;
   z-index: 9999;
   padding: 20px;
-  background: #fff;
+  background: $white;
   box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.3);
   .buttons {
     display: flex;
@@ -312,7 +312,7 @@ export default {
       right: 0;
       width: 100%;
       margin: auto;
-      color: #fff;
+      color: $white;
       padding: 5px 10px;
       background: #f14848;
       border: none;
@@ -343,7 +343,7 @@ export default {
           span {
             flex: 1;
             text-align: center;
-            color: #16dea3;
+            color: $primary;
             margin: auto;
             font-size: 1.4rem;
           }
@@ -358,8 +358,8 @@ export default {
       justify-content: space-around;
       .class-select__input {
         padding: 7px 7px 7px 10px;
-        border: #16dea3 1px solid;
-        background: #fff;
+        border: $primary 1px solid;
+        background: $white;
         border-radius: 5px;
       }
     }
@@ -367,14 +367,14 @@ export default {
       width: 100%;
       height: 110px;
       padding: 10px;
-      border: #16dea3 1px solid;
+      border: $primary 1px solid;
       border-radius: 5px;
       font-family: "Nunito", sans-serif;
       font-size: 1rem;
       transition: background 0.2s ease-out;
       &:focus {
         outline: none;
-        background: #16dea3;
+        background: $primary;
       }
     }
   }
