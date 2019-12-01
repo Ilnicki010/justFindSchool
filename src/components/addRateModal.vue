@@ -126,7 +126,7 @@
         </div>
       </div>
     </transition>
-    <message-component
+    <message-info-box
       v-if="message.value"
       :message-type="message.type"
       :message-value="message.value"
@@ -138,18 +138,20 @@
 import VueRecaptcha from "vue-recaptcha";
 import { setTimeout } from "timers";
 import axios from "axios";
-import messageComponent from "@/components/messageComponent.vue";
+import MessageInfoBox from "@/components/MessageInfoBox";
 
 const ClientJS = require("clientjs");
 
-const authorizationBasic = window.btoa(`${"admin" + ":"}${process.env.VUE_APP_API_KEY}`);
+const authorizationBasic = window.btoa(
+  `${"admin" + ":"}${process.env.VUE_APP_API_KEY}`
+);
 const config = {
   headers: { Authorization: `Basic ${authorizationBasic}` }
 };
 export default {
   components: {
     VueRecaptcha,
-    messageComponent
+    MessageInfoBox
   },
   props: {
     school: {
@@ -229,7 +231,10 @@ export default {
     addRate() {
       if (this.checkForm()) {
         axios
-          .get(`${process.env.VUE_APP_API_URL}/rates/userprint/${this.userPrint}`, config)
+          .get(
+            `${process.env.VUE_APP_API_URL}/rates/userprint/${this.userPrint}`,
+            config
+          )
           .then(data => {
             if (data.data.length === 0) {
               axios

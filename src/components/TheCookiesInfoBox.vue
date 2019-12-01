@@ -2,7 +2,7 @@
   <transition name="slide">
     <div v-if="show" class="cookies-wrapper">
       <span>Ta strona wykorzystuje pliki cookies do poprawnego funkcjonowania.</span>
-      <button class="btn btn--primary" @click="() => (this.show = false)">Cool</button>
+      <button class="btn btn--primary" @click="() => (show = false)">Cool</button>
     </div>
   </transition>
 </template>

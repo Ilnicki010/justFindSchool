@@ -23,18 +23,18 @@
       </div>
     </div>
     <section class="school-list">
-      <school-item v-for="school in orderedSchools" :school="school" :key="school._id" />
+      <school-list-item v-for="school in orderedSchools" :key="school._id" :school="school" />
     </section>
   </div>
 </template>
 
 <script>
 import _ from "lodash";
-import schoolItem from "@/components/schoolItem";
+import SchoolListItem from "@/components/SchoolListItem";
 
 export default {
   components: {
-    schoolItem
+    SchoolListItem
   },
   props: {
     schoolList: {

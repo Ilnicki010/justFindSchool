@@ -42,18 +42,18 @@
         </div>
       </transition>
     </main>
-    <cookies-info />
+    <the-cookies-info-box />
   </div>
 </template>
 <script>
 import axios from "axios";
-import schoolList from "@/components/schoolList";
-import cookiesInfo from "@/components/cookiesInfo";
+import SchoolList from "@/components/SchoolList";
+import TheCookiesInfoBox from "@/components/TheCookiesInfoBox";
 
 export default {
   components: {
-    schoolList,
-    cookiesInfo
+    SchoolList,
+    TheCookiesInfoBox
   },
   props: {
     cityName: {
@@ -78,18 +78,14 @@ export default {
   },
   methods: {
     getSchoolList() {
-      const authorizationBasic = window.btoa(
-        `${"admin" + ":"}${process.env.VUE_APP_API_KEY}`
-      );
+      const authorizationBasic = window.btoa(`${"admin" + ":"}${process.env.VUE_APP_API_KEY}`);
       const config = {
         headers: { Authorization: `Basic ${authorizationBasic}` }
       };
       this.keyToRender++;
-      axios
-        .get(`${process.env.VUE_APP_API_URL}/schools?city=${this.city}`, config)
-        .then(data => {
-          this.allSchools = data.data;
-        });
+      axios.get(`${process.env.VUE_APP_API_URL}/schools?city=${this.city}`, config).then(data => {
+        this.allSchools = data.data;
+      });
     }
   }
 };

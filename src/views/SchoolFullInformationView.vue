@@ -19,15 +19,15 @@
       <div class="content-wrapper__content">
         <rate-knobs v-if="school.ratesAvg" class="rateAvg-knobs" :rate-values="school.ratesAvg" />
         <section v-if="ratesLoaded" class="all-rates">
-          <h2>Opinie ({{ ratesArr.length }})</h2>
+          <h2>Opinie ({{ allRates.length }})</h2>
           <transition name="slide">
-            <rates-list v-if="ratesArr.length > 0" :rates-arr="ratesArr" />
+            <rates-list v-if="allRates.length > 0" :all-rates="allRates" />
             <div v-else class="empty">
               <img class="icon" src="@/assets/no_data.svg" alt="empty icon" />
             </div>
           </transition>
         </section>
-        <loader v-else />
+        <base-loader v-else />
       </div>
     </main>
     <transition name="slide-fast">
@@ -40,7 +40,7 @@
       />
     </transition>
     <transition name="slide">
-      <message-component
+      <message-info-box
         v-if="showMessage"
         :message-type="message.type"
         :message-value="message.value"
@@ -52,11 +52,11 @@
 <script>
 import axios from "axios";
 import { setTimeout } from "timers";
-import rateKnobs from "@/components/rateKnobs";
-import addRateModal from "@/components/addRateModal";
-import ratesList from "@/components/ratesList";
-import loader from "@/components/loader";
-import messageComponent from "@/components/messageComponent";
+import RateKnobs from "@/components/RateKnobs";
+import AddRateModal from "@/components/AddRateModal";
+import RatesList from "@/components/RatesList";
+import BaseLoader from "@/components/BaseLoader";
+import MessageInfoBox from "@/components/MessageInfoBox";
 
 const ClientJS = require("clientjs");
 
@@ -68,11 +68,11 @@ const config = {
 };
 export default {
   components: {
-    rateKnobs,
-    addRateModal,
-    ratesList,
-    messageComponent,
-    loader
+    RateKnobs,
+    AddRateModal,
+    RatesList,
+    MessageInfoBox,
+    BaseLoader
   },
   props: {
     uid: {
@@ -84,7 +84,7 @@ export default {
   data() {
     return {
       school: null,
-      ratesArr: [],
+      allRates: [],
       rateModal: false,
       loaded: false,
       userPrint: "",
@@ -135,7 +135,7 @@ export default {
           config
         )
         .then(data => {
-          this.ratesArr = data.data;
+          this.allRates = data.data;
           this.ratesLoaded = true;
         });
     },

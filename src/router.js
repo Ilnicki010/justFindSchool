@@ -1,8 +1,8 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "./views/Home.vue";
-import schoolFullInfo from "./views/schoolFullInfo.vue";
-import FAQ from "./views/FAQ.vue";
+import HomeView from "@/views/HomeView.vue";
+import SchoolFullInformationView from "@/views/SchoolFullInformationView.vue";
+import FaqView from "@/views/FaqView.vue";
 
 Vue.use(Router);
 export default new Router({
@@ -12,7 +12,7 @@ export default new Router({
     {
       path: "/",
       name: "home",
-      component: Home,
+      component: HomeView,
       meta: {
         keepAlive: true
       }
@@ -20,7 +20,7 @@ export default new Router({
     {
       path: "/szkola/:uid/",
       name: "schoolFullInfo",
-      component: schoolFullInfo,
+      component: SchoolFullInformationView,
       props: true,
       meta: {
         keepAlive: false
@@ -29,7 +29,7 @@ export default new Router({
     {
       path: "/faq",
       name: "faq",
-      component: FAQ
+      component: FaqView
     }
   ]
 });

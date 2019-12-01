@@ -25,11 +25,11 @@
 </template>
 
 <script>
-import rateKnobs from "@/components/rateKnobs";
+import RateKnobs from "@/components/RateKnobs";
 
 export default {
   components: {
-    rateKnobs
+    RateKnobs
   },
   props: {
     school: {
