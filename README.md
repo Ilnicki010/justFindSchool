@@ -1,11 +1,8 @@
 <h1 align="center">Just Find School 📚</h1>
 <span>
-  <a href="#" target="_blank">
-    <img alt="License: mit" src="https://img.shields.io/badge/License-mit-yellow.svg" />
-  </a>
-</span>
-<span>
-    <img alt="W3C: validated" src="https://img.shields.io/w3c-validation/html?targetUrl=https%3A%2F%2Fjustfindschool.com" />
+<img alt="License: mit" src="https://img.shields.io/badge/License-mit-yellow.svg" />
+<img alt="W3C: validated" src="https://img.shields.io/w3c-validation/html?targetUrl=https%3A%2F%2Fjustfindschool.com" />
+<img alt="Netlify: status" src="https://img.shields.io/netlify/9db5ca63-807a-4c45-8cb5-3a54c521082a" />
 </span>
 
 ---
