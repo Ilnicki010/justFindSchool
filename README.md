@@ -10,7 +10,7 @@
 > A web application that allows teens to rate their high school in 4 categories. 
 > Currently we support schools in Gdynia, Sopot and Gdańsk Poland.
 
-### 🌍 [Live app](https://justfindschool.com)
+### 🌍 [Live app](https://cranky-wescoff-7d0756.netlify.app)
 
 ## Tech Stack
 * Vue JS ^2.6.10
