@@ -15,7 +15,7 @@
     "dotenv": "^8.1.0",
     "lodash": "^4.17.15",
     "lodash.sortby": "^4.7.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "vue": "^2.6.10",
     "vue-analytics": "^5.17.2",
     "vue-knob-control": "^1.6.0",
